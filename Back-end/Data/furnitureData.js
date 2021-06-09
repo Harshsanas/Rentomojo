@@ -9,10 +9,12 @@ module.exports = [
         ppmfor6months: "199",
         ppmfor12months: "179",
         deposit: "449",
+        stock: "43",
+        dishcount:"30",
         refundable:true,
         featureSpecs:["1 drawer configuration","1 stool", "Wenge finish", "Stool height LxBxH: 16'x12'x16'"],
-        image:"https://p.rmjo.in/productSquare/djbfgoay-500x500.jpg",
-        categId: "60bf9d7bca4cb8577b1799a8",
+        image:["https://p.rmjo.in/productSquare/djbfgoay-500x500.jpg"],
+        categId: "60c045c7d623851b110e5605",
     },
     {
         name: "Stowy 2-Door Wardrobe",
@@ -24,6 +26,8 @@ module.exports = [
         ppmfor6months: "379",
         ppmfor12months: "339",
         deposit: "849",
+        stock: "43",
+        dishcount:"30",
         refundable:true,
         featureSpecs:[
             "Wood finish: Wenge",
@@ -32,7 +36,7 @@ module.exports = [
             "Easy-access clothing rail+drawers",
             "Comes with a rounded mirror"
         ],
-        image:"https://p.rmjo.in/moodShot/qpaqpi6f-1024x512.jpg",
-        categId: "60bf9d7bca4cb8577b1799a8",
+        image:["https://p.rmjo.in/moodShot/qpaqpi6f-1024x512.jpg"],
+        categId: "60c045c7d623851b110e5605",
     }
 ]

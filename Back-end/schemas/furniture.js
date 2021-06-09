@@ -4,6 +4,8 @@ const fSchema = new mongoose.Schema({
     description: String,
     color: String,
     material: String,
+    stock: String,
+    dishcount: String,
     dimensions: String,
     ppmfor3months: String,
     ppmfor6months: String,
@@ -11,7 +13,7 @@ const fSchema = new mongoose.Schema({
     deposit: String,
     refundable:Boolean,
     featureSpecs:Array,
-    image:String,
+    image:Array,
     categId: String,
 })
 module.exports = mongoose.model('furniture', fSchema)
