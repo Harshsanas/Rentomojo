@@ -1,15 +1,20 @@
 const mongoose = require('mongoose');
 const express = require('express');
+
 // const cors = require('cors');
 const furnitureData = require('./Data/furnitureData');
 const furnitureCategData = require('./Data/furnitureCateg');
 const applianceCategData = require('./Data/applianceCateg');
 const applianceData = require('./Data/appliance')
+const electronicsCategData = require('./Data/electronicsCategData')
+const electronicsData = require('./Data/electronicsData')
 require('dotenv/config')
-const FurnitureCategSchema = require('./schemas/furnitureCateg')
-const FurnitureSchema = require('./schemas/furniture');
-const ApplianceCategSchema = require('./schemas/applianceCateg')
-const ApplianceSchema = require('./schemas/appliance')
+const FurnitureCategSchema = require('./schemas/furniture/furnitureCateg')
+const FurnitureSchema = require('./schemas/furniture/furniture');
+const ApplianceCategSchema = require('./schemas/appliance/applianceCateg')
+const ApplianceSchema = require('./schemas/appliance/appliance')
+const ElectronicsCategSchema = require('./schemas/electronics/electronicsCateg')
+const ElectronicsSchema = require('./schemas/electronics/electronics');
 const app = express();
 app.use(express.json());
 
@@ -60,7 +65,28 @@ app.use(express.json());
 //         res.status(404).send({message: err})
 //     }
 // })
-
+// app.post('/electronicsCateg', async(req, res) => {
+//     try{
+//         for(let i=0; i<electronicsCategData.length; i++) {
+//             const electronicsCateg = new ElectronicsCategSchema(electronicsCategData[i])
+//             await electronicsCateg.save();
+//         }
+//         res.status(201).send("Successfully added!")
+//     } catch(err) {
+//         res.status(404).send({message: err})
+//     }
+// })
+// app.post('/electronics', async(req, res) => {
+//     try{
+//         for(let i=0; i<electronicsData.length; i++) {
+//             const electronics = new ElectronicsSchema(electronicsData[i])
+//             await electronics.save();
+//         }
+//         res.status(201).send("Successfully added!")
+//     } catch(err) {
+//         res.status(404).send({message: err})
+//     }
+// })
 // getting the furniture category
 app.get('/furnitureCateg', async(req, res) => {
     try{
@@ -136,6 +162,45 @@ app.get('/appliance/:id', async(req, res) => {
         id = req.params.id;
         const singleAppliance = await ApplianceSchema.findById(id);
         res.send(singleAppliance)
+    } catch(err) {
+        res.status(404).send(err.message)
+    }
+})
+
+app.get('/electronicsCateg', async(req, res) => {
+    try{
+        const electronicsCateg = await ElectronicsCategSchema.find();
+        res.send(electronicsCateg)
+    } catch(err) {
+        res.status(404).send({message: err})
+    }
+})
+
+// get single furnitureCateg
+app.get('/electronicsCateg/:id', async(req, res) => {
+    try {
+        id = req.params.id;
+        const singleelectronicsCateg = await ElectronicsCategSchema.findById(id);
+        res.send(singleelectronicsCateg)
+    } catch(err) {
+        res.status(404).send(err.message)
+    }
+})
+// getting the furniture
+app.get('/electronics', async(req, res) => {
+    try{
+        const electronics = await ElectronicsSchema.find();
+        res.send(electronics)
+    } catch(err) {
+        res.status(404).send({message: err})
+    }
+})
+// get single furniture
+app.get('/electronics/:id', async(req, res) => {
+    try {
+        id = req.params.id;
+        const singleelectronics = await ElectronicsSchema.findById(id);
+        res.send(singleelectronics)
     } catch(err) {
         res.status(404).send(err.message)
     }
