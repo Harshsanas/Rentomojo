@@ -1,9 +1,9 @@
 const mongoose = require('mongoose');
-const apSchema = new mongoose.Schema({
+const fSchema = new mongoose.Schema({
     name: String,
     description: String,
     color: String,
-    safetyUsage:Array,
+    material: String,
     stock: String,
     dishcount: String,
     dimensions: String,
@@ -15,5 +15,7 @@ const apSchema = new mongoose.Schema({
     featureSpecs:Array,
     image:Array,
     categId: String,
+    productType: String,
+    bgImage:String,
 })
-module.exports = mongoose.model('appliance', apSchema)
+module.exports = mongoose.model('furniture', fSchema)
