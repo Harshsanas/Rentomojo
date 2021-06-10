@@ -1,10 +1,11 @@
 const mongoose = require('mongoose');
-const fSchema = new mongoose.Schema({
+const fitSchema = new mongoose.Schema({
     name: String,
     description: String,
-    color: String,
-    material: String,
+    safetyUsage:Array,
     stock: String,
+    productType: String,
+    bgImage:String,
     dishcount: String,
     dimensions: String,
     ppmfor3months: String,
@@ -16,4 +17,4 @@ const fSchema = new mongoose.Schema({
     image:Array,
     categId: String,
 })
-module.exports = mongoose.model('furniture', fSchema)
+module.exports = mongoose.model('fitness', fitSchema)
