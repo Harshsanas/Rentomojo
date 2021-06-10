@@ -68,7 +68,7 @@ const HEADER = styled.div`
     border:none;
     margin-left:20px;
   }
-  
+
 `;
 
 export default function Header() {
