@@ -1,10 +1,10 @@
-import logo from './logo.svg';
+// import logo from './logo.svg';
 import './App.css';
-
+import RentoMain from './Components/RentoMain';
 function App() {
   return (
     <div className="App">
-    <h1>HELLO</h1>
+    <RentoMain/>
     </div>
   );
 }
