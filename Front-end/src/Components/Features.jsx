@@ -7,6 +7,7 @@ import cancel from "../image/cancel.jpg";
 import delivery from "../image/delivery.jpg";
 import elec from "../image/elec.jpg" 
 import Slider from './Slider';
+import Feedback from './Feedback';
 
 
 const FEATURES = styled.div`
@@ -143,6 +144,8 @@ export default function Features() {
             </div>
           </div>
         </div>
+        <Feedback/>
       </FEATURES>
+
     );
 }
