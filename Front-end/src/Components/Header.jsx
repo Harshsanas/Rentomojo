@@ -19,7 +19,7 @@ const HEADER = styled.div`
   width: 100%;
   top: 0;
   float: left;
-  box-shadow: 0 6px 6px -2px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 4px -2px rgba(0, 0, 0, 0.2);
 
   img {
     float: left;
@@ -68,7 +68,7 @@ const HEADER = styled.div`
     border:none;
     margin-left:20px;
   }
-
+  
 `;
 
 export default function Header() {

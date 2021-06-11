@@ -43,38 +43,31 @@ export default function Slider() {
       <Slideshow/>
         <CATEGORY>
           <div>
-            <img src={package1} alt="" />
-            <br />
+            <img src={package1} alt="" /><br />
             <label>Pakages</label>
           </div>
           <div>
-            <img src={furniture} alt="" />
-            <br />
+            <img src={furniture} alt="" /><br />
             <label>Furniture</label>
           </div>
           <div>
-            <img src={appliances} alt="" />
-            <br />
+            <img src={appliances} alt="" /><br />
             <label>Appliances</label>
           </div>
           <div>
-            <img src={electronic} alt="" />
-            <br />
+            <img src={electronic} alt="" /><br />
             <label>Electronics</label>
           </div>
           <div>
-            <img src={fitness} alt="" />
-            <br />
+            <img src={fitness} alt="" /><br />
             <label>Fitness</label>
           </div>
           <div>
-            <img src={essential} alt="" />
-            <br />
+            <img src={essential} alt="" /><br />
             <label>WFH Essentials</label>
           </div>
           <div>
-            <img src={disco} alt="" />
-            <br />
+            <img src={disco} alt="" /><br />
             <label>Upto 70% Off</label>
           </div>
         </CATEGORY>
