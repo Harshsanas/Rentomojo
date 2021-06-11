@@ -7,6 +7,7 @@ import electronic from "../image/electronic.jpg";
 import fitness from "../image/fitness.jpg";
 import essential from "../image/essential.jpg";
 import disco from "../image/discount.jpg";
+import Slideshow from './Slideshow';
 
 
 const CATEGORY = styled.div`
@@ -39,6 +40,7 @@ const CATEGORY = styled.div`
 export default function Slider() {
     return (
       <div>
+      <Slideshow/>
         <CATEGORY>
           <div>
             <img src={package1} alt="" /><br />
