@@ -4,7 +4,8 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import rentomojo from "../image/rentomojo.png";
 import Modal from "react-modal";
-import cart from "../image/cart.jpg"
+import cart from "../image/cart.jpg";
+import modalsvg from "../image/modalsvg1.png"
 
 Modal.setAppElement("#root")
 
@@ -90,7 +91,18 @@ export default function Header() {
               name="product-name"
             />
             <Link to="/cart">
-              <button id="cart-btn"><img src={cart} alt="cart" style={{width:"20px",marginRight:"7px",marginTop:"-5px"}}/> Cart</button>
+              <button id="cart-btn">
+                <img
+                  src={cart}
+                  alt="cart"
+                  style={{
+                    width: "20px",
+                    marginRight: "7px",
+                    marginTop: "-5px",
+                  }}
+                />{" "}
+                Cart
+              </button>
             </Link>
             <Link to="/login">
               <button id="login-btn" onClick={() => setModalIsOpen(true)}>
@@ -103,9 +115,22 @@ export default function Header() {
         <div>
           <Modal
             isOpen={modalIsOpen}
-            onRequestClose={() => setModalIsOpen(false)}>
-            <h1>HELLO</h1>
-            <button onClick={() => setModalIsOpen(false)}>Close</button>
+            onRequestClose={() => setModalIsOpen(false)}
+          >
+            <div className="modal1-mob">
+              <img src={modalsvg} alt="img" />
+
+              <div className="modal-input">
+                <button onClick={() => setModalIsOpen(false)} style={{float:"right",border:"none",fontSize:'18px',cursor:"pointer"}}>X</button><br /><br />
+                <label>
+                  Enter your number to <br /> Signup or Login
+                </label>
+                <br /><br />
+                <input type="number" name="mob" id="mobile-num" placeholder="Enter your phone number*" />
+
+                <button style={{marginTop:"200px",width:"290px",height:"40px",padding:"10px",borderRadius:"10px",border:"none"}}>Continue</button>
+              </div>
+            </div>
           </Modal>
         </div>
       </>
