@@ -36,7 +36,7 @@ export function Electronics(){
             fontSize: 22,
             fontWeight: 400,
             color: "rgb(49, 49, 49)",
-            padding: "40px 0",
+            padding: "100px 0 50px 0",
             zIndex: 1
         }
     }
@@ -45,12 +45,15 @@ export function Electronics(){
             <div style={style}>
                 <ProductHeader navig = {<><Link to ="/" style = {style.link}>Home</Link>{`${'>'}`}<Link style = {style.navLink} to ="/electronics-on-rent">Electronics</Link></>}/>
             </div>
-            <div style = {style.heading}>Browse By Electronics Type</div>
-            <div style ={style.categ}>
-                {
-                    electronicsCateg?.map(item=><CategType type="electronics" name={item.categName} src={item.image} />)
-                }
+            <div>
+                <div style = {style.heading}>Browse By Electronics Type</div>
+                <div style ={style.categ}>
+                    {
+                        electronicsCateg?.map(item=><CategType type="electronics" name={item.categName} src={item.image} />)
+                    }
+                </div>
             </div>
+            
         </>
     )
 }
