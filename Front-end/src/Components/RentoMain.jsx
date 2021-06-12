@@ -4,6 +4,7 @@ import Footer from "./Footer"
 import { Route, Switch } from 'react-router-dom'
 import Cart from "./Cart"
 import Features from './Features'
+import { Product } from './Productpage/Product'
 
 export default function RentoMain() {
     return (
@@ -18,6 +19,9 @@ export default function RentoMain() {
           </Route>
           <Route exact path="/login">
             <Features />
+          </Route>
+          <Route path="/product">
+            <Product/>
           </Route>
           <Route>
             <h1>404 PAGE NOT FOUND</h1>

@@ -9,6 +9,7 @@ import youtube from "../image/youtube.jpg";
 import insta from "../image/instaicon.jpg";
 import social from "../image/socialicon.jpg";
 import dial from "../image/dial.jpg"
+import { Link } from 'react-router-dom';
 
 const FOOTER = styled.div`
   background: #f5f7fa;
@@ -121,6 +122,7 @@ export default function Footer() {
                 <li>Contact</li>
                 <li>Our Benefits</li>
                 <li>Sitemap</li>
+                <Link to="/product">product</Link>
               </ul>
               <ul>
                 <h3 style={{ fontSize: "13px" }}>INFORMATION</h3>
