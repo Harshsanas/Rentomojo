@@ -1,0 +1,44 @@
+.proName {
+    font-family: Muli, sans-serif;
+    padding: 10px;
+    color: rgb(93,93,93);
+    font-size: 16px;
+}
+.cond {
+    background-color: rgb(245,247,250);
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;;
+}
+.cond div {
+    font-size: 14px;
+    padding-left: 10px;
+    color: rgb(93,93,93);
+}
+.cond * {
+    color: rgb(88,169,170);
+    padding-right: 10px;
+}
+table {
+    border-collapse: collapse;
+    margin: 10px;
+}
+table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    font-size: 14px;
+    color: rgb(93,93,93);
+}
+.firstrow main {
+    font-weight: bold;
+}
+.secondrow section{
+    display: flex;
+    gap: 10px;
+    font-size: 12px;
+}
+.flex {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+}
