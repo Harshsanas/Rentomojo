@@ -9,6 +9,7 @@ import essential from "../image/essential.jpg";
 import disco from "../image/discount.jpg";
 import { NavLink } from 'react-router-dom';
 
+import Slideshow from './Slideshow';
 
 
 const CATEGORY = styled.div`
@@ -50,7 +51,7 @@ const styleLink = {
 export default function Slider() {
     return (
       <div>
-        
+      <Slideshow/>
         <CATEGORY>
           <div>
             <NavLink to='/packages-on-rent' style = {styleLink}>
