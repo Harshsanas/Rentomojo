@@ -3,9 +3,11 @@ import { ProductHeader } from '../Components/product/header/ProductHeader';
 import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { ProductProto } from '../Components/productsProto/ProductProto';
+import { PrdSideBar } from '../Components/sidebar/PrdSideBar';
 
 export function FurnitureProduct(){
     const [productData, setProductData] = React.useState([])
+    const [category, setCategory] = React.useState([])
     const {name} = useParams();
     // console.log(name)
     React.useEffect(()=> {
@@ -14,6 +16,7 @@ export function FurnitureProduct(){
         const getCateg = async () => {
             await axios.get('http://localhost:8080/furnitureCateg')
             .then(res => {
+                setCategory(res.data)
                 res.data?.forEach(item => {
                     if(item.categName === name){
                         id = item._id;
@@ -64,7 +67,7 @@ export function FurnitureProduct(){
             </div>
             <div style = {{display: "flex", width: "90%", margin: "auto"}}>
                 <div style = {{width: "25%"}}>
-
+                    <PrdSideBar names = {category} heading = "ROOMS" productType = {productData}  />
                 </div>
                 <div style = {style.products}>
                     {
