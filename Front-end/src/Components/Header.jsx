@@ -20,7 +20,7 @@ const HEADER = styled.div`
   top: 0;
   float: left;
   box-shadow: 0 6px 6px -2px rgba(0, 0, 0, 0.2);
-
+  z-index: 3;
   img {
     float: left;
     cursor: pointer;
