@@ -134,9 +134,35 @@ app.get('/furniture/categ/:categId', async(req, res) => {
         categId = req.params.categId;
         console.log(categId);
         const singleFurniture = await FurnitureSchema.find();
-        console.log(singleFurniture);
+        // console.log(singleFurniture);
         const furnitures = singleFurniture.filter(item => item.categId === categId);
         res.send(furnitures)
+    } catch(err) {
+        res.status(404).send(err.message)
+    }
+})
+//get appliance by categId
+app.get('/appliance/categ/:categId', async(req, res) => {
+    try {
+        categId = req.params.categId;
+        console.log(categId);
+        const singleAppliance = await ApplianceSchema.find();
+        console.log(singleAppliance);
+        const appliances = singleAppliance.filter(item => item.categId === categId);
+        res.send(appliances)
+    } catch(err) {
+        res.status(404).send(err.message)
+    }
+})
+//get electronics by categId
+app.get('/electronics/categ/:categId', async(req, res) => {
+    try {
+        categId = req.params.categId;
+        console.log(categId);
+        const singleElectronics = await ElectronicsSchema.find();
+        console.log(singleElectronics);
+        const electronicss = singleElectronics.filter(item => item.categId === categId);
+        res.send(electronicss)
     } catch(err) {
         res.status(404).send(err.message)
     }

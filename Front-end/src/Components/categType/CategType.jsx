@@ -26,7 +26,7 @@ export function CategType({name, type,  src}) {
         }
     }
     return (
-        <Link to={`/${type}/${name.split(" ").join("")}`}>
+        <Link to={`/${type}/${name}`}>
             <Container>
                 <div>
                     <img src={src} alt={`${name}`} style = {style.image} />

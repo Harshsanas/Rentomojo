@@ -48,7 +48,7 @@ export function Appliances(){
             <div style = {style.heading}>Browse By Appliance Type</div>
             <div style ={style.categ}>
                 {
-                    applianceCateg?.map(item=><CategType type="appliance" name={item.categName} src={item.image} />)
+                    applianceCateg?.map(item=><CategType key = {item._id} type="appliance" name={item.categName} src={item.image} />)
                 }
             </div>
         </>
