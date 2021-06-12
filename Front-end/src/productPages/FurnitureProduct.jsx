@@ -7,25 +7,15 @@ import { ProductProto } from '../Components/productsProto/ProductProto';
 export function FurnitureProduct(){
     const [productData, setProductData] = React.useState([])
     const {name} = useParams();
+    // console.log(name)
     React.useEffect(()=> {
-        let categName = "", id = "";
-        if(name === "Bedroom") {
-            categName = name;
-        } else if(name === "LivingRoom") {
-            categName = "Living Room"
-        } else if(name === "WorkFromHome") {
-            categName = "Work From Home"
-        } else if(name === "Kitchen&Dinning") {
-            categName = "Kitchen & Dinning"
-        } else if(name === "BabyFurniture") {
-            categName = "Baby Furniture"
-        }
-        console.log(categName)
+        let id = "";
+        
         const getCateg = async () => {
             await axios.get('http://localhost:8080/furnitureCateg')
             .then(res => {
                 res.data?.forEach(item => {
-                    if(item.categName === categName){
+                    if(item.categName === name){
                         id = item._id;
                     }
                 })
@@ -38,7 +28,7 @@ export function FurnitureProduct(){
                 .then(res => {
                     setProductData(res.data)
                 })
-            console.log("id",id);
+            // console.log("id",id);
             
         }
         allData();

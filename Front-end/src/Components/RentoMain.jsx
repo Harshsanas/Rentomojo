@@ -10,6 +10,8 @@ import { Furniture } from '../pages/Furniture';
 import { Packages } from '../pages/Packages';
 import { Appliances } from '../pages/Appliance';
 import { FurnitureProduct } from '../productPages/FurnitureProduct'
+import { ApplianceProduct } from '../productPages/ApplianceProduct'
+import { ElectronicsProduct } from '../productPages/ElectronicsProduct'
 
 export default function RentoMain() {
     return (
@@ -42,6 +44,12 @@ export default function RentoMain() {
           </Route>
           <Route exact path='/furniture/:name'>
             <FurnitureProduct />
+          </Route>
+          <Route exact path='/appliance/:name'>
+            <ApplianceProduct />
+          </Route>
+          <Route exact path='/electronics/:name'>
+            <ElectronicsProduct />
           </Route>
           <Route>
             <h1>404 PAGE NOT FOUND</h1>
