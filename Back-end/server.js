@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const express = require('express');
 
-// const cors = require('cors');
+const cors = require('cors');
 const furnitureData = require('./Data/furnitureData');
 const furnitureCategData = require('./Data/furnitureCateg');
 const applianceCategData = require('./Data/applianceCateg');
@@ -15,7 +15,9 @@ const ApplianceCategSchema = require('./schemas/appliance/applianceCateg')
 const ApplianceSchema = require('./schemas/appliance/appliance')
 const ElectronicsCategSchema = require('./schemas/electronics/electronicsCateg')
 const ElectronicsSchema = require('./schemas/electronics/electronics');
+const furniture = require('./schemas/furniture/furniture');
 const app = express();
+app.use(cors());
 app.use(express.json());
 
 // app.post('/furnitureCateg', async(req, res) => {
@@ -126,7 +128,19 @@ app.get('/furniture/:id', async(req, res) => {
         res.status(404).send(err.message)
     }
 })
-
+//get furniture by categId
+app.get('/furniture/categ/:categId', async(req, res) => {
+    try {
+        categId = req.params.categId;
+        console.log(categId);
+        const singleFurniture = await FurnitureSchema.find();
+        console.log(singleFurniture);
+        const furnitures = singleFurniture.filter(item => item.categId === categId);
+        res.send(furnitures)
+    } catch(err) {
+        res.status(404).send(err.message)
+    }
+})
 app.get('/applianceCateg', async(req, res) => {
     try{
         const applianceCateg = await ApplianceCategSchema.find();
