@@ -1,5 +1,5 @@
 import React from 'react';
-import {Container, SubContainer1, SubContainer2} from './productHeader';
+import {Container, SubContainer1, SubContainer2} from './productHeaderStyle';
 import { NavLink } from 'react-router-dom';
 
 export function ProductHeader({navig}){
