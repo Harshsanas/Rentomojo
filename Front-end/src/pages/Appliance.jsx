@@ -36,7 +36,7 @@ export function Appliances(){
             fontSize: 22,
             fontWeight: 400,
             color: "rgb(49, 49, 49)",
-            padding: "40px 0",
+            padding: "100px 0 50px 0",
             zIndex: 1
         }
     }
