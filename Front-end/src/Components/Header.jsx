@@ -127,7 +127,6 @@ export default function Header() {
                 </label>
                 <br /><br />
                 <input type="number" name="mob" id="mobile-num" placeholder="Enter your phone number*" />
-
                 <button style={{marginTop:"200px",width:"290px",height:"40px",padding:"10px",borderRadius:"10px",border:"none"}}>Continue</button>
               </div>
             </div>
