@@ -41,13 +41,16 @@ const Slideshow = () => {
         <Slide easing="ease">
           <div className="each-slide">
             <div style={{ backgroundImage: `url(${slideImages[0]})` }}></div>
-
           </div>
           <div className="each-slide">
             <div style={{ backgroundImage: `url(${slideImages[1]})` }}></div>
           </div>
         </Slide>
         <div className="safe-div">
+          <img
+            src="https://www.rentomojo.com/public/images/icons/virusSafetyGreen.png"
+            alt="covid" style={{width:"15px",marginLeft:"140px",float:"left",marginRight:"-100px"}}
+          />
           Safety precautions during COVID-19. We’re taking additional steps and
           precautionary measures to protect our community from COVID-19. Know
           more
