@@ -58,19 +58,28 @@ const HEADER = styled.div`
     color: #dc3226;
   }
 
-  #cart-btn{
+  #cart-btn {
     margin-left: 20px;
     cursor: pointer;
-    border:none;
+    border: none;
     background: none;
-
   }
 
-  select{
-    border:none;
-    margin-left:20px;
+  select {
+    border: none;
+    cursor: pointer;
+    margin-left: 30px;
+    margin-right: 30px;
   }
-  
+`;
+
+const INPUTSEC = styled.div`
+  #mobile-num:hover {
+    border-bottom: 2px solid black;
+  }
+  #mobile-num:focus {
+    outline: none;
+  }
 `;
 
 export default function Header() {
@@ -117,16 +126,47 @@ export default function Header() {
             <div className="modal1-mob">
               <img src={modalsvg} alt="img" />
 
-              <div className="modal-input">
-                <button onClick={() => setModalIsOpen(false)} style={{float:"right",border:"none",fontSize:'18px',cursor:"pointer"}}>X</button><br /><br />
-                <label>
-                  Enter your number to <br /> Signup or Login
-                </label>
-                <br /><br />
-                <input type="number" name="mob" id="mobile-num" placeholder="Enter your phone number*" />
-
-                <button style={{marginTop:"200px",width:"290px",height:"40px",padding:"10px",borderRadius:"10px",border:"none"}}>Continue</button>
-              </div>
+              <INPUTSEC>
+                <div className="modal-input">
+                  <button
+                    onClick={() => setModalIsOpen(false)}
+                    style={{
+                      float: "right",
+                      border: "none",
+                      fontSize: "18px",
+                      cursor: "pointer",
+                    }}
+                  >
+                    X
+                  </button>
+                  <br />
+                  <br />
+                  <label>
+                    Enter your number to <br /> Signup or Login
+                  </label>
+                  <br />
+                  <br />
+                  <input
+                    type="text"
+                    name="mob"
+                    id="mobile-num"
+                    placeholder="Enter your phone number*"
+                    maxlength="10"
+                  />
+                  <button
+                    style={{
+                      marginTop: "200px",
+                      width: "290px",
+                      height: "40px",
+                      padding: "10px",
+                      borderRadius: "10px",
+                      border: "none",
+                    }}
+                  >
+                    Continue
+                  </button>
+                </div>
+              </INPUTSEC>
             </div>
           </Modal>
         </div>

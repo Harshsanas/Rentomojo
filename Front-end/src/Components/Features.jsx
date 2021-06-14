@@ -8,6 +8,7 @@ import delivery from "../image/delivery.jpg";
 import elec from "../image/elec.jpg" 
 import Slider from './Slider';
 import Feedback from './Feedback';
+import AllItems from './AllItems';
 
 
 const FEATURES = styled.div`
@@ -144,7 +145,11 @@ export default function Features() {
             </div>
           </div>
         </div>
+
+        <AllItems/>
+
         <Feedback/>
+
       </FEATURES>
 
     );
