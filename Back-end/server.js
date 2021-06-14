@@ -228,6 +228,7 @@ app.get('/appliance/:id', async(req, res) => {
     try {
         id = req.params.id;
         const singleAppliance = await ApplianceSchema.findById(id);
+        // console.log(singleAppliance);
         res.send(singleAppliance)
     } catch(err) {
         res.status(404).send(err.message)
@@ -314,6 +315,49 @@ app.get('/products', async (req, res) => {
         res.status(404).send(err.message)
     }
 
+})
+// GET ALL PRODUCT DATA
+app.get('/allProducts', async(req, res) => {
+    try {
+        const furniture = await FurnitureSchema.find();
+        const appliance = await ApplianceSchema.find();
+        const electronics = await ElectronicsSchema.find();
+        const allData = [];
+        furniture.forEach(item => {
+            allData.push(item)
+        })
+        appliance.forEach(item => {
+            allData.push(item)
+        })
+        electronics.forEach(item => {
+            allData.push(item)
+        })
+        
+        res.send(allData);
+    } catch (err) {
+        res.status(404).send(err.message)
+    }
+})
+//GET THE DATA OF PRODUCT OF ID
+app.get('/product/:id', async(req, res) => {
+    try {
+        id = req.params.id;
+        let data = {};
+        const singleAppliance = await ApplianceSchema.findById(id);
+        const singleFurniture = await FurnitureSchema.findById(id);
+        const singleelectronics = await ElectronicsSchema.findById(id);
+        if(singleAppliance !== null) {
+            data = singleAppliance;
+        } else if(singleFurniture !== null) {
+            data = singleFurniture;
+        } else if(singleelectronics !== null) {
+            data = singleelectronics;
+        }
+        res.status(201).send(data);
+        
+    } catch(err) {
+        res.status(404).send(err.message)
+    }
 })
 
 const start = () => {
