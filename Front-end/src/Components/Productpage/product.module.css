@@ -1,3 +1,4 @@
+
 .dis {
     width: 73%;
 }
@@ -7,8 +8,23 @@
     color: rgb(49,49,49);
     margin-bottom: 60px;
 }
+.imgBox {
+    position: relative;
+}
 .imgBox Img {
     width: 100%;
+}
+.imgBox div {
+    position: absolute;
+    right: 25px;
+    top: 25px;
+    background-color: white;
+    padding: 10px;
+    border-radius: 50%;
+    font-size: 23px;
+}
+.imgBox div:hover {
+    color: rgb(220,50,38);
 }
 .tag {
     display: flex;
@@ -47,6 +63,11 @@
 }
 .covid3 {
     flex: 2;
+}
+.covid3 * {
+    text-decoration: none;
+    color: black;
+    margin-left: 5px;
 }
 .covid img {
     width: 45px;
