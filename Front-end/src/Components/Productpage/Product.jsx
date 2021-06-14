@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import styles from "./product.module.css"
 import { ProductAdd } from './ProductAdd';
 import { HeartOutlined, HeartFilled, RightCircleFilled } from '@ant-design/icons';
@@ -44,6 +44,11 @@ const products = {
 } 
 
 export const Product = () => {
+    // Product id from url,
+    // We can make an api call for that and get the data using the id
+    // api link:- `http://localhost:8080/product/${_id}`
+    const {_id} = useParams();
+    console.log("_id", _id);
     const {featureSpecs, image, id, name, description, color, material, dimensions, productType, bgImage, ppmfor3months, ppmfor6months,
         ppmfor12months, deposit, stock, dishcount, refundable, categId } = products
     
