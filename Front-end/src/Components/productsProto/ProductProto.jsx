@@ -77,22 +77,29 @@ export function ProductProto({...restProps}){
             fontSize: 14,
             border: "1px solid #42ce1f",
             borderRadius: "15px",
-            position: "absolute",
-            top: '40%',
-            left: '50%',
-            right: 'auto',
-            bottom: 'auto',
             marginRight: '-50%',
             transform: 'translate(-50%, -50%)'
-         }
+        },
+        viewContainer: {
+            width: "100%",
+            display: "flex",
+            justfyContent: "center",
+            alignItems: "center",
+            position: "absolute",
+            height: 40,
+            top:"100%",
+            left:"50%",
+            // zIndex: 8,
+            background:"#ffff"
+        }
     }
     if(productPage) {
         return <Redirect to={`/product/${_id}`} />;
     } else {
         return (
-            <div style = {style.conatiner} onMouseEnter = {showQuickView} onMouseLeave = {closeQuickView} onClick = {()=>setProductPage(true)}>
+            <div style = {style.conatiner} onMouseEnter = {showQuickView} onMouseLeave = {closeQuickView}>
                 <div style = {style.imgDiv}>
-                    <img src = {img} alt = {name} style = {style.img} />
+                    <img src = {img} alt = {name} style = {style.img}  onClick = {()=>setProductPage(true)} />
                 </div>
                 <div style = {style.title}>{name}</div>
                 <div style = {style.priceDiv}>
@@ -113,9 +120,12 @@ export function ProductProto({...restProps}){
                         </g>
                     </svg>
                 </div>
-                {quickView && <div style = {style.quickView} onClick = {() => setOpenModal(true)}>
-                    Quick View
-                </div>}
+                <div style = {style.viewContainer}>
+                    {quickView && <div style = {style.quickView} onClick = {() => setOpenModal(true)}>
+                        Quick View
+                    </div>}
+                </div>
+                
                 {
                     openModal && <QuickViewModal {...restProps} openModal = {openModal} setOpenModal = {setOpenModal} />
                 }

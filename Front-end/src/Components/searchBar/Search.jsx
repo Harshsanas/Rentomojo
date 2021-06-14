@@ -10,13 +10,14 @@ export function Search() {
     const style = {
         divModal: {
             padding: 20,
-            width: 400,
-            height: 400,
+            width: 498,
             position: "absolute",
-            top: "50%",
-            left: "50%",
+            top: 30,
+            left: 0,
             border: "1px solid grey",
-            borderRadius: 10,
+            borderTop: "none",
+            borderBottomRightRadius:"10px",
+            borderBottomLeftRadius:"10px",
             display: "flex",
             flexDirection: "column",
             background: "#ffff",
@@ -28,6 +29,9 @@ export function Search() {
             fontSize: 14,
             color: "#454646",
             textDecoration: "none",
+        },
+        searchContent: {
+            position: "relative"
         }
     }
     const handleChange = (e) => {
@@ -45,7 +49,7 @@ export function Search() {
             })
     },[search])
     return (
-        <>
+        <div style = {style.searchContent}>
             <input 
                 type="text"
                 placeholder="Search For Products"
@@ -57,10 +61,10 @@ export function Search() {
             
             {openDiv && <div style = {style.divModal}>
                 {
-                    searchData?.map(item => <NavLink to='/search' style = {style.div}>{item.name}</NavLink>)
+                    searchData?.map(item => <NavLink to='/search' style = {style.div} onClick = {()=>setOpenDiv(false)} >{item.name}</NavLink>)
                 }
             </div>}
-        </>
+        </div>
     )
 }
 
