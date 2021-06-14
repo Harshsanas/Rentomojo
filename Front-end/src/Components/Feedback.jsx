@@ -5,8 +5,9 @@ import leftarrow from "../image/leftarrow.png";
 import feedback1 from "../image/feedback1.jpg"
 
 const FEEDBACK = styled.div`
-  display: flex;
-  flex-direction: row;
+  display: grid;
+  grid-template-columns: auto auto;
+
   margin-top: 100px;
   #lbl1 {
     font-size: 20px;
@@ -42,11 +43,9 @@ const FEEDBACK = styled.div`
 
   .btn-sec{
     width: 300px;
-    float: left;
   }
   
 `;
-
 
 export default function Feedback() {
     return (
@@ -73,10 +72,15 @@ export default function Feedback() {
                 alt=""
                 style={{ height: "21px" }}
                 className="arr-btn"
-              />
+              />.
             </button>
           </div>
           <div className="feedback-section">
+            <img src={feedback1} alt="" className="feedback-img" />
+            <img src={feedback1} alt="" className="feedback-img" />
+            <img src={feedback1} alt="" className="feedback-img" />
+            <img src={feedback1} alt="" className="feedback-img" />
+            <img src={feedback1} alt="" className="feedback-img" />
             <img src={feedback1} alt="" className="feedback-img" />
           </div>
         </FEEDBACK>
