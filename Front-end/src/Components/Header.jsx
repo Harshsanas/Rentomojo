@@ -6,6 +6,7 @@ import rentomojo from "../image/rentomojo.png";
 import Modal from "react-modal";
 import cart from "../image/cart.jpg";
 import modalsvg from "../image/modalsvg1.png"
+import { Search } from './searchBar/Search';
 
 Modal.setAppElement("#root")
 
@@ -85,11 +86,7 @@ export default function Header() {
             <select name="city">
               <option value="Pune">Pune</option>
             </select>
-            <input
-              type="text"
-              placeholder="Search For Products"
-              name="product-name"
-            />
+            <Search />
             <Link to="/cart">
               <button id="cart-btn">
                 <img

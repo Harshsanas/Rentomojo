@@ -16,6 +16,7 @@ const ApplianceSchema = require('./schemas/appliance/appliance')
 const ElectronicsCategSchema = require('./schemas/electronics/electronicsCateg')
 const ElectronicsSchema = require('./schemas/electronics/electronics');
 const furniture = require('./schemas/furniture/furniture');
+const CartSchema = require('./schemas/cart/cartSchema');
 const app = express();
 app.use(cors());
 app.use(express.json());
@@ -89,7 +90,48 @@ app.use(express.json());
 //         res.status(404).send({message: err})
 //     }
 // })
-// getting the furniture category
+
+// CART DATA Link: - 'http://localhost:8080/carts
+app.post('/carts', async(req, res) => {
+    try {
+        const carts = new CartSchema(req.body);
+        await carts.save();
+        res.status(201).send("Successfully added!");
+    } catch (err) {
+        res.status(404).send(err.message);
+    }
+})
+//get cart data of a user(mobile no) Link:- 'http://localhost:8080/carts/<user mob no>'
+app.get('/carts/:user', async(req, res) => {
+    const user = req.params.user;
+    try {
+        const cartData = await CartSchema.find();
+        const userCartData = [];
+        for(let i=0; i<cartData.length; i++){
+            if(cartData[i].user === user) {
+                userCartData.push(cartData[i]);
+            }
+        }
+        res.status(201).send(userCartData);
+    } catch (err) {
+        res.status(404).send(err.message);
+    }
+})
+// update the cart data Link:- http://localhost:8080/carts/<id>' id - product id.
+// specially for incrementing and decrementing the quantity of a product.
+app.patch('/carts/:id', async(req, res) => {
+    id = req.params.id;
+    try {
+        const cartData = await CartSchema.findByIdAndUpdate(id, req.body, {new: true});
+        res.status(201).send(cartData);
+    } catch (err) {
+        res.status(404).send(err.message);
+    }
+})  
+
+
+// GET ALL THE CATEGORY OF PRODUCT
+
 app.get('/furnitureCateg', async(req, res) => {
     try{
         const furnitureCateg = await FurnitureCategSchema.find();
@@ -98,8 +140,24 @@ app.get('/furnitureCateg', async(req, res) => {
         res.status(404).send({message: err})
     }
 })
+app.get('/applianceCateg', async(req, res) => {
+    try{
+        const applianceCateg = await ApplianceCategSchema.find();
+        res.send(applianceCateg)
+    } catch(err) {
+        res.status(404).send({message: err})
+    }
+})
+app.get('/electronicsCateg', async(req, res) => {
+    try{
+        const electronicsCateg = await ElectronicsCategSchema.find();
+        res.send(electronicsCateg)
+    } catch(err) {
+        res.status(404).send({message: err})
+    }
+})
 
-// get single furnitureCateg
+// GET CATEGORY BY ID
 app.get('/furnitureCateg/:id', async(req, res) => {
     try {
         id = req.params.id;
@@ -109,7 +167,27 @@ app.get('/furnitureCateg/:id', async(req, res) => {
         res.status(404).send(err.message)
     }
 })
-// getting the furniture
+app.get('/applianceCateg/:id', async(req, res) => {
+    try {
+        id = req.params.id;
+        const applianceCateg = await ApplianceCategSchema.findById(id);
+        res.send(applianceCateg)
+    } catch(err) {
+        res.status(404).send(err.message)
+    }
+})
+app.get('/electronicsCateg/:id', async(req, res) => {
+    try {
+        id = req.params.id;
+        const singleelectronicsCateg = await ElectronicsCategSchema.findById(id);
+        res.send(singleelectronicsCateg)
+    } catch(err) {
+        res.status(404).send(err.message)
+    }
+})
+
+
+// GET THE DATA FOR EACH FIELD
 app.get('/furniture', async(req, res) => {
     try{
         const furniture = await FurnitureSchema.find();
@@ -118,7 +196,25 @@ app.get('/furniture', async(req, res) => {
         res.status(404).send({message: err})
     }
 })
-// get single furniture
+app.get('/appliance', async(req, res) => {
+    try{
+        const appliance = await ApplianceSchema.find();
+        res.send(appliance)
+    } catch(err) {
+        res.status(404).send({message: err})
+    }
+})
+app.get('/electronics', async(req, res) => {
+    try{
+        const electronics = await ElectronicsSchema.find();
+        res.send(electronics)
+    } catch(err) {
+        res.status(404).send({message: err})
+    }
+})
+
+
+// GET DATA BY ID
 app.get('/furniture/:id', async(req, res) => {
     try {
         id = req.params.id;
@@ -128,7 +224,27 @@ app.get('/furniture/:id', async(req, res) => {
         res.status(404).send(err.message)
     }
 })
-//get furniture by categId
+app.get('/appliance/:id', async(req, res) => {
+    try {
+        id = req.params.id;
+        const singleAppliance = await ApplianceSchema.findById(id);
+        res.send(singleAppliance)
+    } catch(err) {
+        res.status(404).send(err.message)
+    }
+})
+app.get('/electronics/:id', async(req, res) => {
+    try {
+        id = req.params.id;
+        const singleelectronics = await ElectronicsSchema.findById(id);
+        res.send(singleelectronics)
+    } catch(err) {
+        res.status(404).send(err.message)
+    }
+})
+
+
+//GET DATA BY CATEG ID
 app.get('/furniture/categ/:categId', async(req, res) => {
     try {
         categId = req.params.categId;
@@ -141,7 +257,6 @@ app.get('/furniture/categ/:categId', async(req, res) => {
         res.status(404).send(err.message)
     }
 })
-//get appliance by categId
 app.get('/appliance/categ/:categId', async(req, res) => {
     try {
         categId = req.params.categId;
@@ -154,7 +269,6 @@ app.get('/appliance/categ/:categId', async(req, res) => {
         res.status(404).send(err.message)
     }
 })
-//get electronics by categId
 app.get('/electronics/categ/:categId', async(req, res) => {
     try {
         categId = req.params.categId;
@@ -167,84 +281,41 @@ app.get('/electronics/categ/:categId', async(req, res) => {
         res.status(404).send(err.message)
     }
 })
-app.get('/applianceCateg', async(req, res) => {
-    try{
-        const applianceCateg = await ApplianceCategSchema.find();
-        res.send(applianceCateg)
-    } catch(err) {
-        res.status(404).send({message: err})
-    }
-})
 
-// get single furnitureCateg
-app.get('/applianceCateg/:id', async(req, res) => {
+// GET SEARCH QUERY DATA
+
+app.get('/products', async (req, res) => {
     try {
-        id = req.params.id;
-        const applianceCateg = await ApplianceCategSchema.findById(id);
-        res.send(applianceCateg)
-    } catch(err) {
-        res.status(404).send(err.message)
-    }
-})
-
-// get applianceData
-app.get('/appliance', async(req, res) => {
-    try{
+        let name = req.query.search;
+        name = name[0].toUpperCase() + name.slice(1);
+        console.log(typeof name);
+        const furniture = await FurnitureSchema.find();
         const appliance = await ApplianceSchema.find();
-        res.send(appliance)
-    } catch(err) {
-        res.status(404).send({message: err})
-    }
-})
-// get single appliance
-app.get('/appliance/:id', async(req, res) => {
-    try {
-        id = req.params.id;
-        const singleAppliance = await ApplianceSchema.findById(id);
-        res.send(singleAppliance)
-    } catch(err) {
-        res.status(404).send(err.message)
-    }
-})
-
-app.get('/electronicsCateg', async(req, res) => {
-    try{
-        const electronicsCateg = await ElectronicsCategSchema.find();
-        res.send(electronicsCateg)
-    } catch(err) {
-        res.status(404).send({message: err})
-    }
-})
-
-// get single furnitureCateg
-app.get('/electronicsCateg/:id', async(req, res) => {
-    try {
-        id = req.params.id;
-        const singleelectronicsCateg = await ElectronicsCategSchema.findById(id);
-        res.send(singleelectronicsCateg)
-    } catch(err) {
-        res.status(404).send(err.message)
-    }
-})
-// getting the furniture
-app.get('/electronics', async(req, res) => {
-    try{
         const electronics = await ElectronicsSchema.find();
-        res.send(electronics)
-    } catch(err) {
-        res.status(404).send({message: err})
-    }
-})
-// get single furniture
-app.get('/electronics/:id', async(req, res) => {
-    try {
-        id = req.params.id;
-        const singleelectronics = await ElectronicsSchema.findById(id);
-        res.send(singleelectronics)
-    } catch(err) {
+        const allData = [];
+        furniture.forEach(item => {
+            allData.push(item)
+        })
+        appliance.forEach(item => {
+            allData.push(item)
+        })
+        electronics.forEach(item => {
+            allData.push(item)
+        })
+        let data = []
+        for(let i=0; i<allData.length; i++){
+            let prdName = allData[i].name;
+            if(prdName.startsWith(name) || prdName.includes(name)) {
+                data.push(allData[i])
+            }
+        }
+        res.send(data);
+    } catch (err) {
         res.status(404).send(err.message)
     }
+
 })
+
 const start = () => {
     mongoose.connect(process.env.DATABASE_STRING, {
         useNewUrlParser: true,
