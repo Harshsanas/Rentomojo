@@ -1,8 +1,9 @@
 import React from 'react'
-
-export function PrdSideBar({heading, names, productType}) {
-    const removeDuplicates = (item) => {
-        
+import { TypeCheck } from './TypeCheck';
+import {v4 as uuid} from 'uuid';
+export function PrdSideBar({heading, names, productType, handleTypeChange}) {
+    const handleChange = (check, name ) => {
+        handleTypeChange(check, name)
     }
     const style = {
         heading:{
@@ -38,7 +39,7 @@ export function PrdSideBar({heading, names, productType}) {
                 <div style = {style.heading.div}>{heading}</div>
                 {
                     names?.map(item => (
-                        <div style = {style.heading.content}>
+                        <div style = {style.heading.content} key = {uuid()} >
                             <input type="checkbox" style = {style.heading.input}/>
                             <label style = {style.heading.label}>{item.categName}</label>
                         </div>
@@ -46,17 +47,14 @@ export function PrdSideBar({heading, names, productType}) {
                 }
             </div>
 
-            <div style = {style.heading}>
+            {productType && <div style = {style.heading}>
                 <div style = {style.heading.div}>PRODUCT TYPE</div>
                 {
-                    productType?.map(item => (
-                        <div style = {style.heading.content}>
-                            <input type="checkbox" style = {style.heading.input}/>
-                            <label style = {style.heading.label}>{item.productType}({item.stock})</label>
-                        </div>
+                    productType?.map((item) => (
+                        <TypeCheck key ={uuid()} name = {item} typeChange = {handleChange} />
                     ))
                 }
-            </div>
+            </div>}
         </div>
     )
 }

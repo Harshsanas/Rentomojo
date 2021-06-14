@@ -12,6 +12,7 @@ import { Appliances } from '../pages/Appliance';
 import { FurnitureProduct } from '../productPages/FurnitureProduct'
 import { ApplianceProduct } from '../productPages/ApplianceProduct'
 import { ElectronicsProduct } from '../productPages/ElectronicsProduct'
+import SearchProducts from './searchBar/SearchProducts'
 
 export default function RentoMain() {
     return (
@@ -26,6 +27,9 @@ export default function RentoMain() {
           </Route>
           <Route exact path="/login">
             <Features />
+          </Route>
+          <Route exact path='/search'>
+            <SearchProducts />
           </Route>
           <Route exact path='/electronics-on-rent'>
             <Electronics />

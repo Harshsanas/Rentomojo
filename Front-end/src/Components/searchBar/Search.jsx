@@ -1,0 +1,67 @@
+import React from 'react'
+import axios from 'axios';
+import { SearchContext } from '../../Context/SearchContext';
+import { NavLink } from 'react-router-dom';
+export function Search() {
+    const [searchData, setSearchData] = React.useState([]);
+    const [search, setSearch] = React.useState("");
+    const [openDiv, setOpenDiv] = React.useState(false);
+    const {set} = React.useContext(SearchContext)
+    const style = {
+        divModal: {
+            padding: 20,
+            width: 400,
+            height: 400,
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            border: "1px solid grey",
+            borderRadius: 10,
+            display: "flex",
+            flexDirection: "column",
+            background: "#ffff",
+            textAlign: "center"
+        },
+        div:{
+            margin: "5px 0 5px 0",
+            textAlign: "left",
+            fontSize: 14,
+            color: "#454646",
+            textDecoration: "none",
+        }
+    }
+    const handleChange = (e) => {
+        e.preventDefault();
+        setSearch(e.target.value)
+    }
+    React.useEffect(() => {
+        axios.get(`http://localhost:8080/products?search=${search}`)
+            .then(res=>{
+                setSearchData(res.data);
+                set(res.data);
+            })
+            .catch(err=>{
+                console.log(err.message);
+            })
+    },[search])
+    return (
+        <>
+            <input 
+                type="text"
+                placeholder="Search For Products"
+                name="product-name"
+                style = {{outline:"none"}}
+                onChange = {handleChange}
+                onClick = {()=>setOpenDiv(true)}
+            />
+            
+            {openDiv && <div style = {style.divModal}>
+                {
+                    searchData?.map(item => <NavLink to='/search' style = {style.div}>{item.name}</NavLink>)
+                }
+            </div>}
+        </>
+    )
+}
+
+

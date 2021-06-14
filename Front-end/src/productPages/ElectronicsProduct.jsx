@@ -3,17 +3,18 @@ import React from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { ProductHeader } from '../Components/product/header/ProductHeader';
 import { ProductProto } from '../Components/productsProto/ProductProto';
+import { PrdSideBar } from '../Components/sidebar/PrdSideBar';
 
 export function ElectronicsProduct(){
-    const [productData, setProductData] = React.useState([])
+    const [productData, setProductData] = React.useState([]);
+    const [category, setCategory] = React.useState([])
     const {name} = useParams();
     // console.log(name)
-    React.useEffect(()=> {
-        let id = "";
-        
-        const getCateg = async () => {
+    let id = "";
+    const getCateg = async () => {
             await axios.get('http://localhost:8080/electronicsCateg')
             .then(res => {
+                setCategory(res.data);
                 res.data?.forEach(item => {
                     if(item.categName === name){
                         id = item._id;
@@ -31,8 +32,19 @@ export function ElectronicsProduct(){
             console.log("id",id);
             
         }
+    React.useEffect(()=> {
         allData();
     },[])
+    const handleTypeChange = (checked, type) => {
+        // console.log("checkded", checked);
+        if(checked) {
+            const updatedData = productData?.filter(item => item.productType === type) 
+            setProductData(updatedData)
+        } else {
+            allData();
+        }
+
+    }
     const style = {
         marginTop: 60,
         link : {
@@ -59,8 +71,8 @@ export function ElectronicsProduct(){
                 <ProductHeader navig = {<><Link to ="/" style = {style.link}>Home</Link>{`${'>'}`}<Link style = {style.navLink} to ="/electronics-on-rent">Electronics</Link></>}/>
             </div>
             <div style = {{display: "flex", width: "90%", margin: "auto"}}>
-                <div style = {{width: "25%"}}>
-                    {/* filter code */}
+            <div style = {{width: "25%"}}>
+                    <PrdSideBar names = {category} heading = "PRODUCT TYPE" handleTypeChange = {handleTypeChange}  />
                 </div>
                 <div style = {style.products}>
                     {
