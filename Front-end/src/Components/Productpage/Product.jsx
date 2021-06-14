@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import styles from "./product.module.css"
 import { ProductAdd } from './ProductAdd';
+import { HeartOutlined, HeartFilled, RightCircleFilled } from '@ant-design/icons';
 import { ProductSlider } from './ProductSlider'
 
 const slideImages = [
@@ -50,6 +51,9 @@ export const Product = () => {
         <div className={styles.display}>
             <div className={styles.dis}>
                 <div className={styles.imgBox}>
+                    <div>
+                    <HeartOutlined />
+                    </div>
                     <img src={bgImage} alt="img"/>
                 </div>
                 <div className={styles.tag}>
@@ -69,7 +73,8 @@ export const Product = () => {
                             Safety precautions during COVID-19. We’re taking additional steps and precautionary measures to protect our community from COVID-19.
                         </div>
                         <div className={styles.covid3}>
-                            <Link>Know more</Link>
+                            <Link to="/">Know more <RightCircleFilled /></Link>
+                            
                         </div>
                         
                     </div>
@@ -101,7 +106,7 @@ export const Product = () => {
                                     <main>Feature & Specs</main>
                                         {
                                             featureSpecs.map(item => (
-                                                <li>{item}</li>
+                                                <li key={item}>{item}</li>
                                             ))
                                         }
                                 </div>
