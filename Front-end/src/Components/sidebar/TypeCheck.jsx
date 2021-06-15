@@ -1,10 +1,10 @@
 import React from 'react';
 
 export function TypeCheck({name, typeChange}){
-    
+    const [check, setCheck] = React.useState(false)
     const handleChange = (e) => {
-        typeChange(e.target.checked, name[0])
-        
+        setCheck(true);
+        typeChange(e.target.checked, name)
     }
     const style = {
         content: {
@@ -21,7 +21,7 @@ export function TypeCheck({name, typeChange}){
     }
     return (
         <div style = {style.content}>
-            <input type="checkbox" checked = {name[1]} name = {name[0]} onChange = {handleChange} style = {style.input} />
+            <input type="checkbox" checked={check} name = {name} onChange = {handleChange} style = {style.input} />
             <label style = {style.label}>{name}</label>
         </div>
     )
