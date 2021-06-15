@@ -1,8 +1,13 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components';
 import rigtharrow from "../image/rightarrow.png"
 import leftarrow from "../image/leftarrow.png";
-import feedback1 from "../image/feedback1.jpg"
+import feedback1 from "../image/feedback1.jpg";
+import feedback2 from "../image/feedback2.jpg";
+import feedback3 from "../image/feedback3.jpg";
+import feedback4 from "../image/feedback4.jpg";
+import feedback5 from "../image/feedback5.jpg";
+import feedback6 from "../image/feedback6.jpg";
 
 const FEEDBACK = styled.div`
   display: grid;
@@ -48,6 +53,18 @@ const FEEDBACK = styled.div`
 `;
 
 export default function Feedback() {
+
+  const Imagesec = [
+    feedback1,
+    feedback2,
+    feedback3,
+    feedback4,
+    feedback5,
+    feedback6,
+  ];
+
+  const [imageIndex,setImageIndex]=useState(0);
+
     return (
       <div>
         <FEEDBACK>
@@ -63,26 +80,34 @@ export default function Feedback() {
             </label>
             <br />
             <br />
-            <button style={{ float: "left" }}>
+            <button
+              style={{ float: "left" }}
+              disabled={imageIndex === 0}
+              onClick={() => setImageIndex((prev) => prev - 1)}
+            >
               <img src={leftarrow} alt="" className="arr-btn" />
             </button>
-            <button>
+            <button
+              onClick={() => setImageIndex((prev) => prev + 1)}
+              disabled={imageIndex === Imagesec.length-1}
+            >
               <img
                 src={rigtharrow}
                 alt=""
                 style={{ height: "21px" }}
                 className="arr-btn"
-              />.
+              />
+              .
             </button>
           </div>
           <div className="feedback-section">
-            <img src={feedback1} alt="" className="feedback-img" />
-            <img src={feedback1} alt="" className="feedback-img" />
-            <img src={feedback1} alt="" className="feedback-img" />
-            <img src={feedback1} alt="" className="feedback-img" />
-            <img src={feedback1} alt="" className="feedback-img" />
-            <img src={feedback1} alt="" className="feedback-img" />
+            {Imagesec.map((e, idx) => {
+              if (idx === imageIndex) {
+                return <img src={e} alt="feedbacks" className="feedback-img" />;
+              }
+            })}
           </div>
+          ;
         </FEEDBACK>
       </div>
     );
