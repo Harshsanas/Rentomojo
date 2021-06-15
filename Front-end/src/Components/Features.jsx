@@ -8,7 +8,7 @@ import delivery from "../image/delivery.jpg";
 import elec from "../image/elec.jpg" 
 import Slider from './Slider';
 import Feedback from './Feedback';
-import AllItems from './AllItems';
+import Allitems from "./Allitems"
 
 
 const FEATURES = styled.div`
@@ -54,12 +54,16 @@ const FEATURES = styled.div`
 export default function Features() {
     return (
       <FEATURES>
+        <Slider />
 
-      <Slider/>
+        <Allitems />
+
         <label id="lbl1">There's more</label>
         <br />
         <label className="lbl2">to renting</label>
         <hr />
+
+        
 
         <div className="feature-sec">
           <div>
@@ -110,9 +114,7 @@ export default function Features() {
                 style={{ paddingTop: "15px" }}
               />
               <br />
-              <label className="lbl2">
-                Easy return on delivery
-              </label>
+              <label className="lbl2">Easy return on delivery</label>
               <br />
               <label className="lbl3">
                 Quality matters to you, and us! That's why we do a strict
@@ -146,11 +148,7 @@ export default function Features() {
           </div>
         </div>
 
-        <AllItems/>
-
-        <Feedback/>
-
+        <Feedback />
       </FEATURES>
-
     );
 }

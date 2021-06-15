@@ -1,11 +1,12 @@
 
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import rentomojo from "../image/rentomojo.png";
 import Modal from "react-modal";
 import cart from "../image/cart.jpg";
-import modalsvg from "../image/modalsvg1.png"
+import modalsvg from "../image/modalsvg1.png";
+import {AuthContext} from "../Components/AuthContext"
 
 Modal.setAppElement("#root")
 
@@ -83,7 +84,17 @@ const INPUTSEC = styled.div`
 
 export default function Header() {
 
-  const [modalIsOpen,setModalIsOpen]=useState(false)
+  const [modalIsOpen,setModalIsOpen]=useState(false);
+
+  const [number, setnumber] = useState("");
+
+  const{isAuth,handleLoginAuth}=useContext(AuthContext);
+
+  const handleSubmit=()=>{
+    handleLoginAuth(number);
+  }
+
+  console.log(handleLoginAuth);
     return (
       <>
         <HEADER>
@@ -106,7 +117,6 @@ export default function Header() {
                   alt="cart"
                   style={{
                     width: "20px",
-                    marginRight: "7px",
                     marginTop: "-5px",
                   }}
                 />{" "}
@@ -126,9 +136,8 @@ export default function Header() {
             isOpen={modalIsOpen}
             onRequestClose={() => setModalIsOpen(false)}
           >
-            <div className="modal1-mob">
+            <div className="modal1-mob" style={{ overflow: "none" }}>
               <img src={modalsvg} alt="img" />
-
               <INPUTSEC>
                 <div className="modal-input">
                   <button
@@ -155,16 +164,18 @@ export default function Header() {
                     id="mobile-num"
                     placeholder="Enter your phone number*"
                     maxlength="10"
+                    onChange={(e) => setnumber(e.target.value)}
                   />
                   <button
                     style={{
-                      marginTop: "200px",
+                      marginTop: "170px",
                       width: "290px",
                       height: "40px",
                       padding: "10px",
                       borderRadius: "10px",
                       border: "none",
                     }}
+                    onClick={handleSubmit}
                   >
                     Continue
                   </button>
