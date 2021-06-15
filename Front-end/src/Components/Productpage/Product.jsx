@@ -4,14 +4,14 @@ import styles from "./product.module.css"
 import { ProductAdd } from './ProductAdd';
 import { HeartOutlined, HeartFilled, RightCircleFilled } from '@ant-design/icons';
 import { ProductSlider } from './ProductSlider'
-
+import axios from 'axios';
 const slideImages = [
     "https://images.unsplash.com/photo-1563089145-599997674d42?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8d2FsbHBhcGVyfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
     "https://images.unsplash.com/photo-1508739773434-c26b3d09e071?ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8d2FsbHBhcGVyfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
     "https://images.unsplash.com/photo-1606787366850-de6330128bfc?ixid=MnwxMjA3fDF8MHxzZWFyY2h8MXx8d2FsbHBhcGVyfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
   ];
 
-const products = {
+const init = {
     featureSpecs: [
         "1 drawer configuration",
         "1 stool",
@@ -44,14 +44,18 @@ const products = {
 } 
 
 export const Product = () => {
+    const [products, setProducts] = React.useState(init);
     // Product id from url,
     // We can make an api call for that and get the data using the id
     // api link:- `http://localhost:8080/product/${_id}`
-    const {_id} = useParams();
-    console.log("_id", _id);
-    const {featureSpecs, image, id, name, description, color, material, dimensions, productType, bgImage, ppmfor3months, ppmfor6months,
+    const {id} = useParams();
+    const {featureSpecs, image, _id, name, description, color, material, dimensions, productType, bgImage, ppmfor3months, ppmfor6months,
         ppmfor12months, deposit, stock, dishcount, refundable, categId } = products
-    
+    React.useEffect(() => {
+        axios.get(`http://localhost:8080/product/${id}`)
+            .then(res => setProducts(res.data))
+            .catch(err=>console.log(err.message))
+    },[]);
     return (
         <div className={styles.display}>
             <div className={styles.dis}>
