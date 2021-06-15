@@ -10,7 +10,6 @@ import Slider from './Slider';
 import Feedback from './Feedback';
 
 
-
 const FEATURES = styled.div`
   margin-top: 30px;
   padding: 50px 200px 50px 200px;
@@ -54,12 +53,14 @@ const FEATURES = styled.div`
 export default function Features() {
     return (
       <FEATURES>
+        <Slider />
 
-      <Slider/>
         <label id="lbl1">There's more</label>
         <br />
         <label className="lbl2">to renting</label>
         <hr />
+
+        
 
         <div className="feature-sec">
           <div>
@@ -110,9 +111,7 @@ export default function Features() {
                 style={{ paddingTop: "15px" }}
               />
               <br />
-              <label className="lbl2">
-                Easy return on delivery
-              </label>
+              <label className="lbl2">Easy return on delivery</label>
               <br />
               <label className="lbl3">
                 Quality matters to you, and us! That's why we do a strict
@@ -150,6 +149,5 @@ export default function Features() {
         <Feedback/>
 
       </FEATURES>
-
     );
 }

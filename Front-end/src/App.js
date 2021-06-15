@@ -1,10 +1,13 @@
 // import logo from './logo.svg';
 import './App.css';
 import RentoMain from './Components/RentoMain';
+import {AuthContextProvider} from "./Components/AuthContext"
 function App() {
   return (
     <div className="App">
-    <RentoMain/>
+      <AuthContextProvider>
+        <RentoMain />
+      </AuthContextProvider>
     </div>
   );
 }
