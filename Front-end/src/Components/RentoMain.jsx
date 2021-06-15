@@ -26,9 +26,6 @@ export default function RentoMain() {
           <Route exact path="/cart">
             <Cart />
           </Route>
-          <Route exact path="/login">
-            <Features />
-          </Route>
           <Route exact path='/search'>
             <SearchProducts />
           </Route>
