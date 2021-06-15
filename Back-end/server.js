@@ -17,6 +17,7 @@ const ElectronicsCategSchema = require('./schemas/electronics/electronicsCateg')
 const ElectronicsSchema = require('./schemas/electronics/electronics');
 const furniture = require('./schemas/furniture/furniture');
 const CartSchema = require('./schemas/cart/cartSchema');
+const UserSchema = require('./schemas/userSchema/user');
 const app = express();
 app.use(cors());
 app.use(express.json());
@@ -97,6 +98,32 @@ app.post('/carts', async(req, res) => {
         const carts = new CartSchema(req.body);
         await carts.save();
         res.status(201).send("Successfully added!");
+    } catch (err) {
+        res.status(404).send(err.message);
+    }
+})
+// set the user
+app.post('/users', async(req, res) => {
+    try {
+        const users = new UserSchema(req.body);
+        await users.save();
+        res.status(201).send(req.body);
+    } catch (err) {
+        res.status(404).send(err.message);
+    }
+})
+app.get('/users/:mob', async(req, res) => {
+    try {
+        const mob = req.params.mob;
+        const users = await UserSchema.find();
+        let user;
+        for(let i=0; i<users.length; i++){
+            if(users[i].mob === mob){
+                user = users[i]
+            }
+        }
+        console.log(user)
+        res.status(201).send(user);
     } catch (err) {
         res.status(404).send(err.message);
     }
