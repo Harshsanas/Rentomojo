@@ -5,10 +5,10 @@ import styled from 'styled-components';
 import rentomojo from "../image/rentomojo.png";
 import Modal from "react-modal";
 import cart from "../image/cart.jpg";
-import modalsvg from "../image/modalsvg1.png"
 import { Search } from './searchBar/Search';
 import {AuthContext} from "./AuthContext"
 import { SignInModal } from './signin/SignInModal';
+import Allcity from "./citynames/Allcity"
 
 Modal.setAppElement("#root")
 
@@ -65,6 +65,11 @@ const HEADER = styled.div`
     border: none;
     cursor: pointer;
   }
+  .city-btn{
+    border: none;
+    background: none;
+    cursor: pointer;
+  }
 `;
 const style = {
   header: {
@@ -78,38 +83,54 @@ const style = {
     top:100,
     left:"30%",
     zIndex: '8'
-  }
-}
+  },
+  cityModal: {
+    position: "absolute",
+    top: 65,
+    left: "12%",
+    zIndex: "8",
+  },
+};
 
-const INPUTSEC = styled.div`
-  #mobile-num:hover {
-    border-bottom: 2px solid black;
-  }
-  #mobile-num:focus {
-    outline: none;
-  }
-`;
+// const INPUTSEC = styled.div`
+//   #mobile-num:hover {
+//     border-bottom: 2px solid black;
+//   }
+//   #mobile-num:focus {
+//     outline: none;
+//   }
+// `;
 
 export default function Header() {
 
   const [modalIsOpen,setModalIsOpen]=useState(false);
+  const [cityModal,setCityModal]=useState(false);
   const handleClose = () => {
     setModalIsOpen(false);
+    setCityModal(false);
   }
     return (
       <>
         <HEADER>
-          <div style = {style.header}>
+          <div style={style.header}>
             <Link to="/">
               <img src={rentomojo} alt="icon" width="150px" />
             </Link>
-            <select name="city">
-              <option value="Pune">Pune</option>
-            </select>
+            <button className="city-btn" onClick={() => setCityModal(true)}>
+              CITY NAME
+            </button>
             <Search />
             <Link to="/cart">
               <button id="cart-btn">
-                <div style = {{display:"flex", alignItems:"center", height: 25, width: 60, fontSize:15}}>
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    height: 25,
+                    width: 60,
+                    fontSize: 15,
+                  }}
+                >
                   <img
                     src={cart}
                     alt="cart"
@@ -127,9 +148,18 @@ export default function Header() {
               </button>
             </div>
           </div>
-            
         </HEADER>
-        {modalIsOpen && <div style = {style.signInModal} ><SignInModal handleClose= {handleClose}/></div>}
+        {modalIsOpen && (
+          <div style={style.signInModal}>
+            <SignInModal handleClose={handleClose} />
+          </div>
+        )}
+
+        {cityModal && (
+          <div style={style.cityModal}>
+          <Allcity handleClose={handleClose}/>
+          </div>
+        )}
       </>
     );
 }
