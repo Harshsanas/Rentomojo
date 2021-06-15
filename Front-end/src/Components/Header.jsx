@@ -8,6 +8,7 @@ import cart from "../image/cart.jpg";
 import modalsvg from "../image/modalsvg1.png"
 import { Search } from './searchBar/Search';
 import {AuthContext} from "./AuthContext"
+import { SignInModal } from './signin/SignInModal';
 
 Modal.setAppElement("#root")
 
@@ -71,6 +72,12 @@ const style = {
     justifyContent: "space-around",
     alignItems: "center",
     width: "80%"
+  },
+  signInModal: {
+    position:"absolute",
+    top:100,
+    left:"30%",
+    zIndex: '8'
   }
 }
 
@@ -86,16 +93,9 @@ const INPUTSEC = styled.div`
 export default function Header() {
 
   const [modalIsOpen,setModalIsOpen]=useState(false);
-
-  const [number, setnumber] = useState("");
-
-  const{isAuth,handleLoginAuth}=useContext(AuthContext);
-
-  const handleSubmit=()=>{
-    handleLoginAuth(number);
+  const handleClose = () => {
+    setModalIsOpen(false);
   }
-
-  console.log(handleLoginAuth);
     return (
       <>
         <HEADER>
@@ -121,68 +121,15 @@ export default function Header() {
                 </div>
               </button>
             </Link>
-            <Link to="/login">
+            <div>
               <button id="login-btn" onClick={() => setModalIsOpen(true)}>
                 LOGIN / SIGNUP
               </button>
-            </Link>
+            </div>
           </div>
             
         </HEADER>
-
-        <div>
-          <Modal
-            isOpen={modalIsOpen}
-            onRequestClose={() => setModalIsOpen(false)}
-          >
-            <div className="modal1-mob" style={{ overflow: "none" }}>
-              <img src={modalsvg} alt="img" />
-              <INPUTSEC>
-                <div className="modal-input">
-                  <button
-                    onClick={() => setModalIsOpen(false)}
-                    style={{
-                      float: "right",
-                      border: "none",
-                      fontSize: "18px",
-                      cursor: "pointer",
-                    }}
-                  >
-                    X
-                  </button>
-                  <br />
-                  <br />
-                  <label>
-                    Enter your number to <br /> Signup or Login
-                  </label>
-                  <br />
-                  <br />
-                  <input
-                    type="text"
-                    name="mob"
-                    id="mobile-num"
-                    placeholder="Enter your phone number*"
-                    maxlength="10"
-                    onChange={(e) => setnumber(e.target.value)}
-                  />
-                  <button
-                    style={{
-                      marginTop: "170px",
-                      width: "290px",
-                      height: "40px",
-                      padding: "10px",
-                      borderRadius: "10px",
-                      border: "none",
-                    }}
-                    onClick={handleSubmit}
-                  >
-                    Continue
-                  </button>
-                </div>
-              </INPUTSEC>
-            </div>
-          </Modal>
-        </div>
+        {modalIsOpen && <div style = {style.signInModal} ><SignInModal handleClose= {handleClose}/></div>}
       </>
     );
 }
