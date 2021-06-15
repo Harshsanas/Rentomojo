@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components';
 import rigtharrow from "../image/rightarrow.png"
 import leftarrow from "../image/leftarrow.png";
@@ -62,6 +62,9 @@ export default function Feedback() {
     feedback5,
     feedback6,
   ];
+
+  const [imageIndex,setImageIndex]=useState(0);
+
     return (
       <div>
         <FEEDBACK>
@@ -77,10 +80,17 @@ export default function Feedback() {
             </label>
             <br />
             <br />
-            <button style={{ float: "left" }}>
+            <button
+              style={{ float: "left" }}
+              disabled={imageIndex === 0}
+              onClick={() => setImageIndex((prev) => prev - 1)}
+            >
               <img src={leftarrow} alt="" className="arr-btn" />
             </button>
-            <button>
+            <button
+              onClick={() => setImageIndex((prev) => prev + 1)}
+              disabled={imageIndex === Imagesec.length-1}
+            >
               <img
                 src={rigtharrow}
                 alt=""
@@ -91,9 +101,11 @@ export default function Feedback() {
             </button>
           </div>
           <div className="feedback-section">
-            {Imagesec.map((e) => (
-              <img src={e} alt="" className="feedback-img" />
-            ))}
+            {Imagesec.map((e, idx) => {
+              if (idx === imageIndex) {
+                return <img src={e} alt="feedbacks" className="feedback-img" />;
+              }
+            })}
           </div>
           ;
         </FEEDBACK>

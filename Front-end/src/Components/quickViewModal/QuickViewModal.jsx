@@ -5,7 +5,8 @@ import Modal from 'react-modal';
 
 export function QuickViewModal({openModal, setOpenModal, ...restProps}) {
     const [index, setIndex] = React.useState(0);
-    const [tenure, setTenure] = React.useState(3);
+    const [tenure, setTenure] = React.useState("3");
+    const [price, setPrice] = React.useState(0);
     const code = "HOME5"
     const {name, ppmfor3months, ppmfor6months, ppmfor12months, deposit, dishcount, image} = restProps;
     const handleTenure = (e) => {
@@ -75,6 +76,17 @@ export function QuickViewModal({openModal, setOpenModal, ...restProps}) {
         }
         
     }
+    React.useEffect(() => {
+        if(tenure === "3") {
+            setPrice(ppmfor3months)
+        } else if (tenure === "6") {
+            setPrice(ppmfor6months)
+        } else if(tenure === "12") {
+            setPrice(ppmfor12months)
+        }
+        // console.log(tenure)
+        // console.log(ppmfor12months, ppmfor3months, ppmfor6months, price)
+    },[tenure])
     return (
         <Modal
           isOpen={openModal}
@@ -127,7 +139,7 @@ export function QuickViewModal({openModal, setOpenModal, ...restProps}) {
                         </div>
                         <div>
                             <div style = {{fontSize: 9, color: "rgb(113, 113, 113)"}}>Monthly rent for {tenure} months</div>
-                            <div style = {{fontSize: 15}}>{} /mo</div> 
+                            <div style = {{fontSize: 15}}>{price} /mo</div> 
                         </div>
                     </div>
 

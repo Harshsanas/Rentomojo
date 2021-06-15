@@ -5,46 +5,42 @@ import styled from 'styled-components';
 import rentomojo from "../image/rentomojo.png";
 import Modal from "react-modal";
 import cart from "../image/cart.jpg";
-import modalsvg from "../image/modalsvg1.png";
-import {AuthContext} from "../Components/AuthContext"
+import modalsvg from "../image/modalsvg1.png"
+import { Search } from './searchBar/Search';
+import {AuthContext} from "./AuthContext"
 
 Modal.setAppElement("#root")
 
 const HEADER = styled.div`
   height: 60px;
-  text-align: center;
   position: fixed;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+  align-items: center;
   background: #fff;
   width: 100%;
   top: 0;
-  float: left;
+  /* float: left; */
   box-shadow: 0 4px 4px -2px rgba(0, 0, 0, 0.2);
   z-index: 4;
   img {
-    float: left;
+    /* float: left; */
     cursor: pointer;
   }
 
   input {
     border-radius: 12px;
-    margin-top: 10px;
     border: 1px solid grey;
     padding: 0px 20px 0px 18px;
     width: 500px;
     height: 40px;
-    background: #f5f7fa;
-    margin-left: 20px;
+    background: #ffff;
   }
 
   #login-btn {
-    margin-left: 20px;
-    margin-top: 10px;
     color: white;
     height: 40px;
-    float: right;
     border-radius: 10px;
     border: 1px solid #dc3226;
     background: #dc3226;
@@ -59,7 +55,6 @@ const HEADER = styled.div`
   }
 
   #cart-btn {
-    margin-left: 20px;
     cursor: pointer;
     border: none;
     background: none;
@@ -68,10 +63,16 @@ const HEADER = styled.div`
   select {
     border: none;
     cursor: pointer;
-    margin-left: 30px;
-    margin-right: 30px;
   }
 `;
+const style = {
+  header: {
+    display: "flex",
+    justifyContent: "space-around",
+    alignItems: "center",
+    width: "80%"
+  }
+}
 
 const INPUTSEC = styled.div`
   #mobile-num:hover {
@@ -98,29 +99,26 @@ export default function Header() {
     return (
       <>
         <HEADER>
-          <div className="header">
+          <div style = {style.header}>
             <Link to="/">
               <img src={rentomojo} alt="icon" width="150px" />
             </Link>
             <select name="city">
               <option value="Pune">Pune</option>
             </select>
-            <input
-              type="text"
-              placeholder="Search For Products"
-              name="product-name"
-            />
+            <Search />
             <Link to="/cart">
               <button id="cart-btn">
-                <img
-                  src={cart}
-                  alt="cart"
-                  style={{
-                    width: "20px",
-                    marginTop: "-5px",
-                  }}
-                />{" "}
-                Cart
+                <div style = {{display:"flex", alignItems:"center", height: 25, width: 60, fontSize:15}}>
+                  <img
+                    src={cart}
+                    alt="cart"
+                    style={{
+                      width: "20px",
+                    }}
+                  />{" "}
+                  Cart
+                </div>
               </button>
             </Link>
             <Link to="/login">
@@ -129,6 +127,7 @@ export default function Header() {
               </button>
             </Link>
           </div>
+            
         </HEADER>
 
         <div>

@@ -4,12 +4,15 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
+import { SearchContextData } from './Context/SearchContext';
 
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
+    <SearchContextData>
       <App />
+    </SearchContextData>
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById("root")

@@ -8,7 +8,6 @@ import delivery from "../image/delivery.jpg";
 import elec from "../image/elec.jpg" 
 import Slider from './Slider';
 import Feedback from './Feedback';
-import Allitems from "./Allitems"
 
 
 const FEATURES = styled.div`
@@ -55,8 +54,6 @@ export default function Features() {
     return (
       <FEATURES>
         <Slider />
-
-        <Allitems />
 
         <label id="lbl1">There's more</label>
         <br />
@@ -148,7 +145,9 @@ export default function Features() {
           </div>
         </div>
 
-        <Feedback />
+
+        <Feedback/>
+
       </FEATURES>
     );
 }

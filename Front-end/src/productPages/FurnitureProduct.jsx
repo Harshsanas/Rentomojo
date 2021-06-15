@@ -8,34 +8,60 @@ import { PrdSideBar } from '../Components/sidebar/PrdSideBar';
 export function FurnitureProduct(){
     const [productData, setProductData] = React.useState([])
     const [category, setCategory] = React.useState([])
+    const productType = [
+        ["Mattresses", false],
+        ["Beds", false],
+        ["Wardrobe & Organizer", false],
+        ["Bedside Tables", false],
+        ["Chest of Drawers", false]
+    ]
     const {name} = useParams();
     // console.log(name)
-    React.useEffect(()=> {
-        let id = "";
-        
-        const getCateg = async () => {
-            await axios.get('http://localhost:8080/furnitureCateg')
+    
+    let id = "";
+    const getCateg = async () => {
+        await axios.get('http://localhost:8080/furnitureCateg')
+        .then(res => {
+            setCategory(res.data)
+            res.data?.forEach(item => {
+                if(item.categName === name){
+                    id = item._id;
+                }
+            })
+        });
+        return id;
+    }
+    const allData = async () => {
+        const id = await getCateg();
+        axios.get(`http://localhost:8080/furniture/categ/${id}`)
             .then(res => {
-                setCategory(res.data)
-                res.data?.forEach(item => {
-                    if(item.categName === name){
-                        id = item._id;
-                    }
-                })
-            });
-            return id;
-        }
-        const allData = async () => {
-            const id = await getCateg();
-            axios.get(`http://localhost:8080/furniture/categ/${id}`)
-                .then(res => {
-                    setProductData(res.data)
-                })
-            // console.log("id",id);
-            
-        }
+                setProductData(res.data)
+            })
+        // console.log("id",id);
+        
+    }
+    React.useEffect(()=> {
         allData();
     },[])
+    const handleTypeChange = (checked, type) => {
+        // console.log("checkded", checked);
+        productType.forEach(item=>{
+            if(item[0] === type){
+                item[1] = checked
+                console.log(item[0])
+            }
+            console.log(item[1]);
+        });
+        
+        if(checked) {
+            
+            const updatedData = productData?.filter(item => item.productType === type) 
+            setProductData(updatedData)
+        } else {
+            allData();
+        }
+
+    }
     const style = {
         container: {
             marginTop: 60,
@@ -67,7 +93,7 @@ export function FurnitureProduct(){
             </div>
             <div style = {{display: "flex", width: "90%", margin: "auto"}}>
                 <div style = {{width: "25%"}}>
-                    <PrdSideBar names = {category} heading = "ROOMS" productType = {productData}  />
+                    <PrdSideBar names = {category} heading = "ROOMS" productType = {productType} handleTypeChange = {handleTypeChange}  />
                 </div>
                 <div style = {style.products}>
                     {
@@ -80,4 +106,5 @@ export function FurnitureProduct(){
             
         </>
     )
+    
 }
