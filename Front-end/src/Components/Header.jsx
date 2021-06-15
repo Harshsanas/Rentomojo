@@ -5,10 +5,9 @@ import styled from 'styled-components';
 import rentomojo from "../image/rentomojo.png";
 import Modal from "react-modal";
 import cart from "../image/cart.jpg";
-import modalsvg from "../image/modalsvg1.png"
 import { Search } from './searchBar/Search';
-import {AuthContext} from "./AuthContext"
 import { SignInModal } from './signin/SignInModal';
+import { getUser, setUser } from './utils/localStorage';
 
 Modal.setAppElement("#root")
 
@@ -75,7 +74,7 @@ const style = {
   },
   signInModal: {
     position:"absolute",
-    top:100,
+    top:120,
     left:"30%",
     zIndex: '8'
   }
@@ -93,9 +92,21 @@ const INPUTSEC = styled.div`
 export default function Header() {
 
   const [modalIsOpen,setModalIsOpen]=useState(false);
+  const [acc, setAcc] = React.useState(false)
+  const [isAuth, setIsAuth] = React.useState(JSON.parse(getUser('isAuth')));
+  const user = JSON.parse(getUser("user"));
+  
   const handleClose = () => {
     setModalIsOpen(false);
   }
+  const handleLogOut = () => {
+    setUser('isAuth', false)
+    setIsAuth(false);
+    setAcc(false);
+  }
+  React.useEffect(() => {
+    setIsAuth(JSON.parse(getUser('isAuth')));
+  },[modalIsOpen,acc])
     return (
       <>
         <HEADER>
@@ -121,13 +132,48 @@ export default function Header() {
                 </div>
               </button>
             </Link>
-            <div>
+            {!isAuth && <div>
               <button id="login-btn" onClick={() => setModalIsOpen(true)}>
                 LOGIN / SIGNUP
               </button>
-            </div>
+            </div>}
+            {isAuth && <div style = {{border:"1px solid green", height: 30,
+              width: 150, display:"flex", overflow: "hidden", padding: "5px 5px", borderRadius:"5px"
+            }} onClick = {()=>setAcc(!acc)}>
+                <div style = {{width: 30, height: 30, color: "#ffff", borderRadius:15, display:"flex",
+                  justifyContent:"center", alignItems:"center", background: "green", marginRight: "5px"
+              }}>{user.name[0]}</div>
+                <div style = {{display:"flex", alignItems:"center"}}>{user.name.split(" ")[0]}</div>
+              </div>}
           </div>
-            
+          {acc && <div style = {{display: "flex", flexDirection:"column",
+                    width: 150,
+                    position:"absolute",
+                    top:50,
+                    left: "77%",
+                    padding: "10px 10px 10px 10px",
+                    background: "#ffff",
+                    border: "1px solid grey",
+                    borderRadius:"5px"
+
+          }}>
+              <div style = {{display: "flex", cursor: "pointer", alignItems:"center", margin:"10px 0"}}>
+                <img src="https://static.thenounproject.com/png/3542378-200.png" style = {{width:20, marginRight:"10px"}} alt=""/>
+                Account</div>
+              <div style = {{display: "flex", cursor: "pointer", alignItems:"center", margin:"10px 0"}}>
+                <img src="https://pics.freeicons.io/uploads/icons/png/17773426191535958157-512.png" style = {{width:20, marginRight:"10px"}} alt=""/>
+                Settings</div>
+              <div style = {{display: "flex", cursor: "pointer", alignItems:"center", margin:"10px 0"}}>
+                  <img src="https://image.shutterstock.com/image-vector/heart-plus-pozitive-wishlist-icon-260nw-666321889.jpg" style = {{width:20, marginRight:"10px"}} alt=""/>
+                My Wishlist</div>
+              <div style = {{cursor: "pointer",
+              display: "flex",alignItems:"center", margin:"10px 0"
+
+            }} onClick = {handleLogOut}>
+              <img src="https://cdn1.iconfinder.com/data/icons/ios-edge-line-6/25/Logout_1-512.png" style = {{width:20, marginRight:"10px"}} alt=""/>
+              
+              Logout</div>
+            </div>}
         </HEADER>
         {modalIsOpen && <div style = {style.signInModal} ><SignInModal handleClose= {handleClose}/></div>}
       </>
