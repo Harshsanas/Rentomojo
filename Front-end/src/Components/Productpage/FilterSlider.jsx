@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Slider from '@material-ui/core/Slider';
 
@@ -27,16 +27,28 @@ const marks = [
   }
 ];
 
-function valuetext(value) {
-  return `${value}`;
-}
+
 
 function valueLabelFormat(value) {
   return marks.findIndex((mark) => mark.value === value) + 1;
 }
 
-export default function DiscreteSlider() {
+export default function DiscreteSlider({handleMonths}) {
   const classes = useStyles();
+  const [slide, setSlide] = useState(12)
+  
+  function valuetext(value) {
+    if(value === 7.5) {
+      setSlide(6)
+    }
+    else {
+      setSlide(value)
+    }
+  }
+
+  useEffect(()=> {
+    handleMonths(slide)
+  },[slide])
 
   return (
     <div className={classes.root}>

@@ -36,6 +36,13 @@
     cursor: pointer;
     border-radius: 5px;
 }
+.button button{
+    border: none;
+    outline: none;
+    background-color: transparent;
+    font-weight: bold;
+    font-size: 18px;
+}
 .quantity select {
     padding: 5px 10px;
     border-radius: 5px;

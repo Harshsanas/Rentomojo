@@ -1,8 +1,14 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {DeleteOutlined, InfoCircleOutlined} from "@ant-design/icons"
 import styles from "./CartItem.module.css"
 
 export const CartItem = ({name, image, deposit, stock, ppmfor3months, ppmfor6months, ppmfor12months}) => {
+    const[count, setCount] = useState(1)
+
+    const handleCount = (value) => {
+        setCount(count + value)
+    }
+
     return (
         <div className={styles.itemBox}>
            <div className={styles.bg}>
@@ -27,9 +33,9 @@ export const CartItem = ({name, image, deposit, stock, ppmfor3months, ppmfor6mon
                </div>
                <div className={styles.quantity}>
                     <div className={styles.button}>
-                        <div>-</div>
-                        <div>1</div>
-                        <div>+</div>
+                        <button disabled={count === 1} onClick={()=>handleCount(-1)}>-</button>
+                        <div>{count}</div>
+                        <button disabled={count === 5} onClick={()=> handleCount(1)}>+</button>
                     </div>
                     <div>
                         <select>
