@@ -2,7 +2,7 @@ import React from 'react'
 import Header from './Header'
 import Footer from "./Footer"
 import { Route, Switch } from 'react-router-dom'
-import Cart from "./Cart"
+import { CartPage } from './CartPage/CartPage'
 import Features from './Features'
 import { Electronics } from '../pages/Electronics'
 import { Fitness } from '../pages/Fitness';
@@ -24,7 +24,7 @@ export default function RentoMain() {
             <Features />
           </Route>
           <Route exact path="/cart">
-            <Cart />
+            <CartPage/>
           </Route>
           <Route exact path='/search'>
             <SearchProducts />
