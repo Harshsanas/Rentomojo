@@ -4,9 +4,15 @@ import styles from "./CartItem.module.css"
 
 export const CartItem = ({name, image, deposit, stock, ppmfor3months, ppmfor6months, ppmfor12months}) => {
     const[count, setCount] = useState(1)
+    const [valid, setvalid] = useState(12)
 
     const handleCount = (value) => {
         setCount(count + value)
+    }
+
+    const handleSelect = (e) => {
+        const value = e.target.value
+        setvalid(Number(value))
     }
 
     return (
@@ -38,10 +44,10 @@ export const CartItem = ({name, image, deposit, stock, ppmfor3months, ppmfor6mon
                         <button disabled={count === 5} onClick={()=> handleCount(1)}>+</button>
                     </div>
                     <div>
-                        <select>
-                            <option>12 Months</option>
-                            <option>6 Months</option>
-                            <option>3 Months</option>
+                        <select onChange={handleSelect} value={valid}>
+                            <option value="12">12 Months</option>
+                            <option value="6">6 Months</option>
+                            <option value="3">3 Months</option>
                         </select>
                     </div>  
                </div>

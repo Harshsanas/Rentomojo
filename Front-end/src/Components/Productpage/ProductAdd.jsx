@@ -23,7 +23,8 @@ export const ProductAdd = ({featureSpecs, image, _id, name, description, color, 
                 image, _id, name, dimensions, productType, bgImage, ppmfor3months, ppmfor6months,
                 ppmfor12months, deposit, stock, dishcount, refundable,
                 months,
-                rate
+                rate,
+                count: 1
             }
         }
         
