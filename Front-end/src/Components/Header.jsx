@@ -94,7 +94,7 @@ export default function Header() {
   const [modalIsOpen,setModalIsOpen]=useState(false);
   const [acc, setAcc] = React.useState(false)
   const [isAuth, setIsAuth] = React.useState(JSON.parse(getUser('isAuth')));
-  const user = JSON.parse(getUser("user"));
+  const user = getUser("user");
   
   const handleClose = () => {
     setModalIsOpen(false);

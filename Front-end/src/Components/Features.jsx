@@ -8,6 +8,7 @@ import delivery from "../image/delivery.jpg";
 import elec from "../image/elec.jpg" 
 import Slider from './Slider';
 import Feedback from './Feedback';
+import { AllItems } from './allItems/AllItems';
 
 
 const FEATURES = styled.div`
@@ -59,7 +60,9 @@ export default function Features() {
         <br />
         <label className="lbl2">to renting</label>
         <hr />
-
+        <div>
+          <AllItems />
+        </div>
         
 
         <div className="feature-sec">
