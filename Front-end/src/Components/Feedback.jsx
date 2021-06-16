@@ -52,6 +52,7 @@ const FEEDBACK = styled.div`
   
 `;
 
+
 export default function Feedback() {
 
   const Imagesec = [
