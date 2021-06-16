@@ -40,7 +40,7 @@ export function PrdSideBar({heading, names, productType, handleTypeChange}) {
                 {
                     names?.map(item => (
                         <div style = {style.heading.content} key = {uuid()} >
-                            <input type="checkbox" style = {style.heading.input}/>
+                            <input type="checkbox" name = {item.categName} style = {style.heading.input} onChnage = {handleChange} />
                             <label style = {style.heading.label}>{item.categName}</label>
                         </div>
                     ))

@@ -22,9 +22,11 @@ const HEADER = styled.div`
   background: #fff;
   width: 100%;
   top: 0;
+  /* float: left; */
   box-shadow: 0 4px 4px -2px rgba(0, 0, 0, 0.2);
-  z-index: 10;
+  z-index: 4;
   img {
+    /* float: left; */
     cursor: pointer;
   }
 
@@ -91,6 +93,14 @@ const style = {
   },
 };
 
+// const INPUTSEC = styled.div`
+//   #mobile-num:hover {
+//     border-bottom: 2px solid black;
+//   }
+//   #mobile-num:focus {
+//     outline: none;
+//   }
+// `;
 
 export default function Header() {
 

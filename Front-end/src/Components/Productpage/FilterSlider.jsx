@@ -2,15 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Slider from '@material-ui/core/Slider';
 
-const useStyles = makeStyles({
-  root: {
-    width: 300,
-  },
-  slide: {
-    color: "rgb(220,50,38)",
-    fontWeight: "bold"
-  }
-});
+
 
 const marks = [
   {
@@ -33,10 +25,19 @@ function valueLabelFormat(value) {
   return marks.findIndex((mark) => mark.value === value) + 1;
 }
 
-export default function DiscreteSlider({handleMonths}) {
-  const classes = useStyles();
+export default function DiscreteSlider({handleMonths, color, width}) {
+ 
   const [slide, setSlide] = useState(12)
-  
+  const useStyles = makeStyles({
+    root: {
+      width: width ? width : 300,
+    },
+    slide: {
+      color: color ? color : "rgb(220,50,38)",
+      fontWeight: "bold"
+    }
+  });
+  const classes = useStyles();
   function valuetext(value) {
     if(value === 7.5) {
       setSlide(6)

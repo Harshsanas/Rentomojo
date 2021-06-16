@@ -10,9 +10,9 @@ import { SearchContextData } from './Context/SearchContext';
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
-    <SearchContextData>
-      <App />
-    </SearchContextData>
+      <SearchContextData>
+        <App />
+      </SearchContextData>
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById("root")
