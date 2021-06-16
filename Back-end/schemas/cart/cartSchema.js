@@ -2,14 +2,15 @@ const mongoose = require('mongoose');
 const cartSchema = new mongoose.Schema({
     user: String,
     name: String,
-    stock: Number,
-    dishcount: Number,
-    ppmfor3months: Number,
-    ppmfor6months: Number,
-    ppmfor12months: Number,
-    deposit: Number,
+    stock: String,
+    dishcount: String,
+    ppmfor3months: String,
+    ppmfor6months: String,
+    ppmfor12months: String,
+    deposit: String,
     refundable:Boolean,
     image:String,
-    quantity: Number
+    quantity: Number,
+    months:String
 })
 module.exports = mongoose.model('carts', cartSchema)
