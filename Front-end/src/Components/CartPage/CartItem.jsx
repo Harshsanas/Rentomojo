@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import {DeleteOutlined, InfoCircleOutlined} from "@ant-design/icons"
 import styles from "./CartItem.module.css"
-
-export const CartItem = ({name, image, deposit, stock, ppmfor3months, ppmfor6months, ppmfor12months}) => {
-    const[count, setCount] = useState(1)
+import axios from 'axios';
+export const CartItem = ({ _id, name, image, deposit, stock, ppmfor3months, ppmfor6months, ppmfor12months, quantity}) => {
+    const[count, setCount] = useState(quantity)
     const [valid, setvalid] = useState(12)
 
     const handleCount = (value) => {
@@ -15,6 +15,11 @@ export const CartItem = ({name, image, deposit, stock, ppmfor3months, ppmfor6mon
         setvalid(Number(value))
     }
 
+    React.useEffect(() => {
+        axios.patch(`http://localhost:8080/carts/${_id}`, {quantity:count})
+            .then(res=>console.log(res.data))
+            .catch(err=>console.log(err.message));
+    },[count])
     return (
         <div className={styles.itemBox}>
            <div className={styles.bg}>
