@@ -2,7 +2,6 @@ import React from 'react'
 import Header from './Header'
 import Footer from "./Footer"
 import { Route, Switch } from 'react-router-dom'
-import Cart from "./Cart"
 import Features from './Features'
 import { Electronics } from '../pages/Electronics'
 import { Fitness } from '../pages/Fitness';
@@ -14,6 +13,7 @@ import { ApplianceProduct } from '../productPages/ApplianceProduct'
 import { ElectronicsProduct } from '../productPages/ElectronicsProduct'
 import SearchProducts from './searchBar/SearchProducts'
 import { Product } from './Productpage/Product'
+import {CartPage} from "./CartPage/CartPage"
 
 export default function RentoMain() {
     return (
@@ -24,7 +24,7 @@ export default function RentoMain() {
             <Features />
           </Route>
           <Route exact path="/cart">
-            <Cart />
+            <CartPage/>
           </Route>
           <Route exact path='/search'>
             <SearchProducts />

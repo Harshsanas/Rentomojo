@@ -1,0 +1,22 @@
+.display {
+    display: flex;
+    margin-top: 100px;
+    justify-content: space-evenly;
+    background-color: white;
+    padding: 12px;
+    border: 1px solid red;
+}
+.partOne {
+    width: 38%;
+}
+.partTwo {
+    display: flex;
+    width: 38%;
+    justify-content: space-around;
+}
+.partTwo main {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    color: rgb(186,186,186);
+}
