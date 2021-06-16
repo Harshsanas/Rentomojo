@@ -1,8 +1,38 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import {CheckCircleFilled, LineOutlined} from "@ant-design/icons"
 import styles from "./CartSummary.module.css"
 
+const initState = {
+    name: "",
+    mobile: "",
+    otp: ""
+}
+
 export const CartSummary = () => {
+    const [user, setUser] = useState(initState)
+    const [pay, setPay] = useState(true)
+    const [mobile, setMobile] = useState("")
+    const [mobileCond, setMobileCond] = useState(true)
+    const [otp, setOtp] = useState("")
+    const [otpCond, setOtpCond] = useState(true)
+
+    const handlePay = () => {
+        setPay(false)
+    }
+
+    const handleMobile = () => {
+        setUser({
+            ...user,
+            mobile
+        })
+        setMobile("")
+        setMobileCond(false)
+         
+    }
+    useEffect(()=> {
+        
+    },[])
+
     return (
         <div className={styles.summary}>
             <div className={styles.suggest}>
@@ -61,21 +91,77 @@ export const CartSummary = () => {
                         </div>
                     </div>
                 </div>
-                <div className={styles.button}>
-                   <div>
-                        <main>2627</main>
-                        <div>Payable Now</div>
-                   </div>
-                   <section>Proceed</section>
-                </div>
+                {pay && (
+                    <div onClick={handlePay} className={styles.button}>
+                    <div>
+                         <main>2627</main>
+                         <div>Payable Now</div>
+                    </div>
+                    <section>Proceed</section>
+                 </div>
+                )
+                }
             </div>
 
             <LineOutlined style={{color: "rgb(191,207,220)"}} rotate={90}/>
 
-            <div className={styles.whitebg}>
-                <img src="https://www.rentomojo.com/public/images/radical-cart/icons/account__icon-inactive.svg" alt="img" />
-                <div>Verify Your Phone Number</div>
-            </div>
+           {pay ? (
+                <div className={styles.whitebg}>
+                    <img src="https://www.rentomojo.com/public/images/radical-cart/icons/account__icon-inactive.svg" alt="img" />
+                    <div>Verify Your Phone Number</div>
+                </div>
+           ) : (
+                <div>
+                    <div>
+                        <img src="https://www.rentomojo.com/public/images/radical-cart/icons/account__icon.svg" alt="img"/>
+                        <div>Verify Your Phone Number</div>
+                    </div>
+                   
+                       { mobileCond ? (
+                            <>
+                            <div>
+                                <input
+                                    type="text"
+                                    value={mobile}
+                                    placeholder="enter mobile number"
+                                    onChange={(e)=> setMobile(e.target.value)}
+                                    maxLength= "10"
+                                />
+                                <input
+                                    disabled={mobile.length<10}
+                                    type="submit"
+                                    value="GO"
+                                    onClick={handleMobile}
+                                />
+                            </div>
+                            <div>{mobile.length}/10</div>
+                            </>
+                       ) : otpCond ? (
+                        <>
+                        <div>
+                            <input
+                                type="text"
+                                value={otp}
+                                placeholder="enter the OTP"
+                                onChange={(e)=> setOtp(e.target.value)}
+                                maxLength= "4"
+                            />
+                            <input
+                                disabled={otp.length !== 4}
+                                type="submit"
+                                value="GO"
+                                onClick={()=> setOtpCond(false)}
+                            />
+                        </div>
+                        <div>{otp.length}/4</div>
+                        </>
+                       ) : (
+                           <div>next</div>
+                       )
+
+                       }
+                </div>
+           )}
 
             <LineOutlined style={{color: "rgb(191,207,220)"}} rotate={90}/>
 
