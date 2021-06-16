@@ -1,11 +1,49 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { CheckCircleFilled, InfoCircleOutlined, ShoppingCartOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
 import styles from "./ProductAdd.module.css"
 import DiscreteSlider from './FilterSlider';
 
-export const ProductAdd = ({ id, name, color, ppmfor3months, ppmfor6months,
+export const ProductAdd = ({featureSpecs, image, _id, name, description, color, material, dimensions, productType, bgImage, ppmfor3months, ppmfor6months,
     ppmfor12months, deposit, stock, dishcount, refundable, categId }) => {
+        const [product, setProduct] = useState("");
+        const [months, setMonths] = useState("");
+        const [rate, setRate] = useState(ppmfor12months)
+        console.log(months, product)
+
+        const handleMonths = (slide) => {
+            setMonths(slide)
+            setProduct({
+                ...product,
+                months: slide
+            })
+        }
+        const handleAddCart = () => {
+            const payload = {
+                image, _id, name, dimensions, productType, bgImage, ppmfor3months, ppmfor6months,
+                ppmfor12months, deposit, stock, dishcount, refundable,
+                months,
+                rate,
+                count: 1
+            }
+        }
+        
+        const handlerate = (months) => {
+            if(months === 3) {
+                setRate(ppmfor3months)
+            }
+            else if(months === 6) {
+                setRate(ppmfor6months)
+            }
+            else if(months === 12) {
+                setRate(ppmfor12months)
+            }
+        }
+    
+    useEffect(()=> {
+        handlerate(months)
+    },[months])
+
     return (
         <div className={styles.addBox}>
             <div className={styles.proName}>{name}</div>
@@ -15,13 +53,13 @@ export const ProductAdd = ({ id, name, color, ppmfor3months, ppmfor6months,
             </div>
             <div>
                 <div style={{padding: "13px" }}>
-                   <DiscreteSlider/>
+                   <DiscreteSlider handleMonths={handleMonths}/>
                 </div>
                 <table>
                     <tbody>
                         <tr className={styles.firstrow}>
                             <td>
-                                <main>₹{ppmfor3months}/mon</main>
+                                <main>₹{rate}/mo</main>
                                 <div className={styles.flex}>
                                     <div>Monthly Rent</div>
                                     <InfoCircleOutlined/>
@@ -30,7 +68,7 @@ export const ProductAdd = ({ id, name, color, ppmfor3months, ppmfor6months,
                             <td>
                                 <main>₹{deposit}</main>
                                 <div className={styles.flex}>
-                                    <div>Monthly Rent</div>
+                                    <div>Deposit</div>
                                     <InfoCircleOutlined/>
                                 </div>
                             </td>
@@ -74,7 +112,7 @@ export const ProductAdd = ({ id, name, color, ppmfor3months, ppmfor6months,
                 </div>
                 <div className={styles.book}>
                     <ShoppingCartOutlined />
-                    <div>Book your plan</div>
+                    <div onClick={handleAddCart}>Book your plan</div>
                 </div>
                 <div className={styles.bg}>
                     <div className={styles.special}>Special Offers</div>

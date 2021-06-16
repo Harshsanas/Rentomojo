@@ -1,0 +1,10 @@
+.bg {
+    display: flex;
+    width: 85%;
+    margin: auto;
+    padding-top: 100px;
+    gap: 40px;
+}
+.display {
+    background-color: rgb(173, 174, 177);
+}
