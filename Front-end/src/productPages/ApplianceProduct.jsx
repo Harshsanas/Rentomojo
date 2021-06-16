@@ -72,7 +72,7 @@ export function ApplianceProduct(){
                 <ProductHeader navig = {<><Link to ="/" style = {style.link}>Home</Link>{`${'>'}`}<Link style = {style.navLink} to ="/appliances-on-rent">Appliance</Link></>}/>
             </div>
             <div style = {{display: "flex", width: "90%", margin: "auto"}}>
-            <div style = {{width: "25%"}}>
+                <div style = {{width: "25%"}}>
                     <PrdSideBar names = {category} heading = "PRODUCT TYPE" handleTypeChange = {handleTypeChange}  />
                 </div>
                 <div style = {style.products}>
