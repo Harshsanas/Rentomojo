@@ -1,10 +1,34 @@
 import React from 'react'
+import { setUser } from '../utils/localStorage';
+import axios from 'axios';
 export function SignInModal({handleClose}) {
     const [number, setNumber] = React.useState("");
+    const [name, setName] = React.useState("");
     const [otp, setOtp] = React.useState("");
-    const [isOtp, setIsOtp] = React.useState(false)
+    const [isOtp, setIsOtp] = React.useState(false);
+    const [details, setDetails] = React.useState(false);
     const handleContinue = () => {
         setIsOtp(true);
+    }
+    const postUser = (name, number) => {
+        axios.post('http://localhost:8080/users', {name, mob:number})
+            .then(res=>{
+                setUser('user', res.data)
+            })
+            .catch(err=>console.log(err.message))
+    }
+    const handleDetails = () => {
+        setUser("isAuth", true);
+        axios.get(`http://localhost:8080/users/${number}`)
+            .then(res => {
+                if(!res.data){
+                    postUser(name, number);
+                } else {
+                    setUser('user', res.data);
+                }
+            })
+            .catch(err=>console.log(err.message))
+            handleClose()
     }
     const style = {
         container: {
@@ -14,7 +38,7 @@ export function SignInModal({handleClose}) {
             justifyContent: "space-between",
             background: "#ffff",
             padding: 20,
-            position: "relative"
+            position: "fixed"
         },
         imgDiv: {
             width: "50%",
@@ -83,11 +107,15 @@ export function SignInModal({handleClose}) {
                         {isOtp && <><input type="number" min='0' max = '999999' value = {otp} placeholder="Enter your OTP" style = {style.input} onChange = {(e)=>setOtp(e.target.value)} />
                         <div style = {{textAlign:"right", width: "80%",fontSize: 12
                             }}>{number.length}/10</div></>}
+                        <div>
+                            <input type="text" value = {name} placeholder="Enter your name" style = {style.input} onChange = {(e)=>setName(e.target.value)} />
+                        </div>
                     </div>
 
                     {!isOtp && <div style = {style.button} onClick = {handleContinue} >Continue</div>}
-                    {isOtp && <div style = {style.button}  >Continue</div>}
+                    {isOtp && <div style = {style.button} onClick = {handleDetails} >Continue</div>}
                 </div>
+                
                 <div style = {style.close} onClick = {handleClose}>+</div>
             </div>
         </div>
