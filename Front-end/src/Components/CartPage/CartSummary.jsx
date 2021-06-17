@@ -13,7 +13,7 @@ const initState = {
                 560001`
 }
 
-export const CartSummary = () => {
+export const CartSummary = ({refund, rent}) => {
     const [user, setUser] = useState(initState)
     const [pay, setPay] = useState(true)
     const [mobile, setMobile] = useState("")
@@ -25,7 +25,6 @@ export const CartSummary = () => {
     const [email, setEmail] = useState("")
     const [userCond, setUserCond] = useState(true)
     
-    const styleGo = mobile.length===10 ? "inputenabled" : "inputdisabled"
 
     const handlePay = () => {
         setPay(false)
@@ -79,11 +78,11 @@ export const CartSummary = () => {
                         <section>Payable Now</section>
                         <main>
                             <div>Refundable Deposit</div>
-                            <div>2090</div>
+                            <div>₹{refund}</div>
                         </main>
                         <main>
                             <div>Delivery Charges</div>
-                            <div>0</div>
+                            <div>₹0</div>
                         </main>
                     </div>
                     <div>
@@ -91,16 +90,16 @@ export const CartSummary = () => {
                             <section>Monthly Payable</section>
                             <main>
                                 <div>Product Rent</div>
-                                <div>0</div>
+                                <div>₹{rent}</div>
                             </main>
                             <main>
                                 <div>Addons Rent</div>
-                                <div>0</div>
+                                <div>₹0</div>
                             </main>
                             <hr/>
                             <main>
                                 <div>Total Monthly Rent</div>
-                                <div>0/mo</div>
+                                <div>₹{rent}/mo</div>
                             </main>
                             
                         </div>
@@ -113,7 +112,7 @@ export const CartSummary = () => {
                 {pay && (
                     <div onClick={handlePay} className={styles.button}>
                         <div>
-                            <main>2627</main>
+                            <main>₹{refund+rent}</main>
                             <div>Payable Now</div>
                         </div>
                         <section>Proceed</section>
