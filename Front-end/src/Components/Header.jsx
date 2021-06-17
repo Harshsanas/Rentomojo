@@ -74,9 +74,21 @@ const style = {
   },
   signInModal: {
     position:"absolute",
-    top:120,
-    left:"30%",
-    zIndex: '8'
+    top:100,
+    left:"25%",
+    zIndex: '8',
+  },
+  modalBg: {
+    top:0,
+    position:"fixed",
+    width:"100%",
+    height: "100vh",
+    display:"flex",
+    justifyContent:"center",
+    alignItems: "center",
+    background: "rgba(0, 0, 0, 0.5)",
+    zIndex: "5",
+    
   }
 }
 
@@ -175,7 +187,7 @@ export default function Header() {
               Logout</div>
             </div>}
         </HEADER>
-        {modalIsOpen && <div style = {style.signInModal} ><SignInModal handleClose= {handleClose}/></div>}
+        {modalIsOpen &&<div style = {style.modalBg}><div style = {style.signInModal} ><SignInModal handleClose= {handleClose}/></div></div>}
       </>
     );
 }

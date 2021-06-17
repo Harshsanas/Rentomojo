@@ -25,7 +25,7 @@ export function AllItems() {
             alignItems:"center",
             justifyContent:"center",
             fontSize: 30,
-            fontWeight: "600",
+            fontWeight: "500",
             margin:5,
             cursor:"pointer",
             outline:"none",
@@ -33,20 +33,23 @@ export function AllItems() {
         },
         content: {
             display:"flex",
-
+            justifyContent:"space-between"
         }
     }
     return (
         <div style = {{width:"100%"}}>
-            <div style ={{textAlign:"right", margin:"0 auto 20px", display:"flex"}}>
-                <button style = {style.button} disabled = {productIndex === 1} onClick = {() => setProductIndex(prev=>prev-1)}>{"<"}</button>
-                <button style = {style.button} disabled = {productIndex*4 === products.length} onClick = {() => setProductIndex(prev=>prev+1)}>{">"}</button>
+            <div style = {{display:"flex", flexDirection:"row-reverse"}}>
+                <div style ={{textAlign:"right", display:"flex", width:"100px"}}>
+                    <button style = {style.button} disabled = {productIndex === 1} onClick = {() => setProductIndex(prev=>prev-1)}>{"<"}</button>
+                    <button style = {style.button} disabled = {productIndex*4 === products.length} onClick = {() => setProductIndex(prev=>prev+1)}>{">"}</button>
+                </div>
             </div>
+            
 
             <div style = {style.content}>
                 {
                     products?.map((item, idx)=>{
-                        if(idx < (productIndex) * 4 && idx >= (productIndex - 1) * 4)
+                        if(idx < (productIndex) * 3 && idx >= (productIndex - 1) * 3)
                             return <ProductProto key = {item._id} {...item}/>})
                 }
             </div>

@@ -38,7 +38,8 @@ export function SignInModal({handleClose}) {
             justifyContent: "space-between",
             background: "#ffff",
             padding: 20,
-            position: "relative"
+            position: "relative",
+            borderRadius:"10px"
         },
         imgDiv: {
             width: "50%",
@@ -82,7 +83,7 @@ export function SignInModal({handleClose}) {
         },
         close:{
             position: "absolute",
-            top: 0,
+            top:0,
             right: 0,
             transform: 'rotate(45deg)',
             fontSize: 40,
@@ -116,8 +117,9 @@ export function SignInModal({handleClose}) {
                     {isOtp && <div style = {style.button} onClick = {handleDetails} >Continue</div>}
                 </div>
                 
-                <div style = {style.close} onClick = {handleClose}>+</div>
+                
             </div>
+            <div style = {style.close} onClick = {handleClose}>+</div>
         </div>
     )
 }
