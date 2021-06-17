@@ -38,7 +38,7 @@ export function SignInModal({handleClose}) {
             justifyContent: "space-between",
             background: "#ffff",
             padding: 20,
-            position: "relative"
+            position: "fixed"
         },
         imgDiv: {
             width: "50%",
