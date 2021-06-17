@@ -80,17 +80,38 @@ const style = {
   },
   signInModal: {
     position:"absolute",
-    top:120,
-    left:"30%",
-    zIndex: '8'
+    top:100,
+    left:"25%",
+    zIndex: '8',
+  },
+  modalBg: {
+    top:0,
+    position:"fixed",
+    width:"100%",
+    height: "100vh",
+    display:"flex",
+    justifyContent:"center",
+    alignItems: "center",
+    background: "rgba(0, 0, 0, 0.5)",
+    zIndex: "5",
+    
   },
   cityModal: {
     position: "relative",
     top: 65,
     left: "12%",
     zIndex: "8",
-  },
-};
+  }
+}
+
+const INPUTSEC = styled.div`
+  #mobile-num:hover {
+    border-bottom: 2px solid black;
+  }
+  #mobile-num:focus {
+    outline: none;
+  }
+`;
 
 export default function Header() {
 
@@ -274,17 +295,14 @@ export default function Header() {
             </div>
           )}
         </HEADER>
-        {modalIsOpen && (
-          <div style={style.signInModal}>
-            <SignInModal handleClose={handleClose} />
-          </div>
-        )}
 
+        {modalIsOpen &&<div style = {style.modalBg}><div style = {style.signInModal} ><SignInModal handleClose= {handleClose}/></div></div>}
         {cityModal && (
           <div style={style.cityModal}>
             <Allcity handleClose={handleClose} handleCity={handleCity} />
           </div>
         )}
+
       </>
     );
 }

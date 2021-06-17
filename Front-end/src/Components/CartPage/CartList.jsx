@@ -7,7 +7,7 @@ import axios from 'axios';
 export const CartList = () => {
     const [cartData, setCartData] = React.useState([])
     const cart = [{name: "Rex 3_seater Sofa", image: "https://p.rmjo.in/productSquare/smr3l0tl-500x500.jpg", deposit: "1668", stock: "4", ppmfor3months: "420", ppmfor6months: "400", ppmfor12months: "380",}]
-    React.useEffect(()=> {
+    const getCartData = () => {
         const user = getUser('user');
         console.log(user)
         if(user !== null) {
@@ -18,6 +18,16 @@ export const CartList = () => {
             })
             .catch(err=>console.log(err.message));
         }
+    }
+    const deleteItem = (id) => {
+        axios.delete(`http://localhost:8080/carts/${id}`)
+            .then(res => {
+                getCartData();
+            })
+            .catch(err => console.log(err.message));
+    }
+    React.useEffect(()=> {
+        getCartData()
     },[])
     return (
         <div className={styles.itemMargin}>
@@ -33,7 +43,7 @@ export const CartList = () => {
             <div>
                 {
                     cartData.map(item => (
-                       <CartItem {...item}/> 
+                       <CartItem {...item} deleteItem = {deleteItem} /> 
                     ))
                 }
             </div>
