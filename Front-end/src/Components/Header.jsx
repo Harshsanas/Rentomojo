@@ -1,12 +1,12 @@
 
-import React, { useContext, useState } from 'react';
+import React, {  useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import rentomojo from "../image/rentomojo.png";
 import Modal from "react-modal";
 import cart from "../image/cart.jpg";
 import { Search } from './searchBar/Search';
 import { SignInModal } from './signin/SignInModal';
+import Allcity from './citynames/Allcity';
 import { getUser, setUser } from './utils/localStorage';
 
 Modal.setAppElement("#root")
@@ -64,13 +64,19 @@ const HEADER = styled.div`
     border: none;
     cursor: pointer;
   }
+  .city-btn{
+    border: none;
+    background: none;
+    cursor: pointer;
+  }
 `;
 const style = {
   header: {
     display: "flex",
     justifyContent: "space-around",
     alignItems: "center",
-    width: "80%"
+    width: "80%",
+    position: "absolute",
   },
   signInModal: {
     position:"absolute",
@@ -89,6 +95,12 @@ const style = {
     background: "rgba(0, 0, 0, 0.5)",
     zIndex: "5",
     
+  },
+  cityModal: {
+    position: "relative",
+    top: 65,
+    left: "12%",
+    zIndex: "8",
   }
 }
 
@@ -107,9 +119,16 @@ export default function Header() {
   const [acc, setAcc] = React.useState(false)
   const [isAuth, setIsAuth] = React.useState(JSON.parse(getUser('isAuth')));
   const user = getUser("user");
+  const [cityModal,setCityModal]=useState(false);
+  const [cityName, setCityName] = React.useState("Pune");
   
+  const handleCity=(cityName)=>{
+    console.log(cityName);
+    setCityName(cityName);
+  }
   const handleClose = () => {
     setModalIsOpen(false);
+    setCityModal(false);
   }
   const handleLogOut = () => {
     setUser('isAuth', false)
@@ -122,17 +141,29 @@ export default function Header() {
     return (
       <>
         <HEADER>
-          <div style = {style.header}>
+          <div style={style.header}>
             <Link to="/">
-              <img src={rentomojo} alt="icon" width="150px" />
+              <img
+                src="https://www.rentomojo.com/public/images/logo.svg"
+                alt="icon"
+                width="150px"
+              />
             </Link>
-            <select name="city">
-              <option value="Pune">Pune</option>
-            </select>
+            <button className="city-btn" onClick={() => setCityModal(true)}>
+              {cityName}
+            </button>
             <Search />
             <Link to="/cart">
               <button id="cart-btn">
-                <div style = {{display:"flex", alignItems:"center", height: 25, width: 60, fontSize:15}}>
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    height: 25,
+                    width: 60,
+                    fontSize: 15,
+                  }}
+                >
                   <img
                     src={cart}
                     alt="cart"
@@ -144,50 +175,134 @@ export default function Header() {
                 </div>
               </button>
             </Link>
-            {!isAuth && <div>
-              <button id="login-btn" onClick={() => setModalIsOpen(true)}>
-                LOGIN / SIGNUP
-              </button>
-            </div>}
-            {isAuth && <div style = {{border:"1px solid green", height: 30,
-              width: 150, display:"flex", overflow: "hidden", padding: "5px 5px", borderRadius:"5px"
-            }} onClick = {()=>setAcc(!acc)}>
-                <div style = {{width: 30, height: 30, color: "#ffff", borderRadius:15, display:"flex",
-                  justifyContent:"center", alignItems:"center", background: "green", marginRight: "5px"
-              }}>{user.name[0]}</div>
-                <div style = {{display:"flex", alignItems:"center"}}>{user.name.split(" ")[0]}</div>
-              </div>}
+            {!isAuth && (
+              <div>
+                <button id="login-btn" onClick={() => setModalIsOpen(true)}>
+                  LOGIN / SIGNUP
+                </button>
+              </div>
+            )}
+            {isAuth && (
+              <div
+                style={{
+                  border: "1px solid green",
+                  height: 30,
+                  width: 150,
+                  display: "flex",
+                  overflow: "hidden",
+                  padding: "5px 5px",
+                  borderRadius: "5px",
+                }}
+                onClick={() => setAcc(!acc)}
+              >
+                <div
+                  style={{
+                    width: 30,
+                    height: 30,
+                    color: "#ffff",
+                    borderRadius: 15,
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    background: "green",
+                    marginRight: "5px",
+                  }}
+                >
+                  {user.name[0]}
+                </div>
+                <div style={{ display: "flex", alignItems: "center" }}>
+                  {user.name.split(" ")[0]}
+                </div>
+              </div>
+            )}
           </div>
-          {acc && <div style = {{display: "flex", flexDirection:"column",
-                    width: 150,
-                    position:"absolute",
-                    top:50,
-                    left: "77%",
-                    padding: "10px 10px 10px 10px",
-                    background: "#ffff",
-                    border: "1px solid grey",
-                    borderRadius:"5px"
-
-          }}>
-              <div style = {{display: "flex", cursor: "pointer", alignItems:"center", margin:"10px 0"}}>
-                <img src="https://static.thenounproject.com/png/3542378-200.png" style = {{width:20, marginRight:"10px"}} alt=""/>
-                Account</div>
-              <div style = {{display: "flex", cursor: "pointer", alignItems:"center", margin:"10px 0"}}>
-                <img src="https://pics.freeicons.io/uploads/icons/png/17773426191535958157-512.png" style = {{width:20, marginRight:"10px"}} alt=""/>
-                Settings</div>
-              <div style = {{display: "flex", cursor: "pointer", alignItems:"center", margin:"10px 0"}}>
-                  <img src="https://image.shutterstock.com/image-vector/heart-plus-pozitive-wishlist-icon-260nw-666321889.jpg" style = {{width:20, marginRight:"10px"}} alt=""/>
-                My Wishlist</div>
-              <div style = {{cursor: "pointer",
-              display: "flex",alignItems:"center", margin:"10px 0"
-
-            }} onClick = {handleLogOut}>
-              <img src="https://cdn1.iconfinder.com/data/icons/ios-edge-line-6/25/Logout_1-512.png" style = {{width:20, marginRight:"10px"}} alt=""/>
-              
-              Logout</div>
-            </div>}
+          {acc && (
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                width: 150,
+                position: "absolute",
+                top: 50,
+                left: "77%",
+                padding: "10px 10px 10px 10px",
+                background: "#ffff",
+                border: "1px solid grey",
+                borderRadius: "5px",
+              }}
+            >
+              <div
+                style={{
+                  display: "flex",
+                  cursor: "pointer",
+                  alignItems: "center",
+                  margin: "10px 0",
+                }}
+              >
+                <img
+                  src="https://static.thenounproject.com/png/3542378-200.png"
+                  style={{ width: 20, marginRight: "10px" }}
+                  alt=""
+                />
+                Account
+              </div>
+              <div
+                style={{
+                  display: "flex",
+                  cursor: "pointer",
+                  alignItems: "center",
+                  margin: "10px 0",
+                }}
+              >
+                <img
+                  src="https://pics.freeicons.io/uploads/icons/png/17773426191535958157-512.png"
+                  style={{ width: 20, marginRight: "10px" }}
+                  alt=""
+                />
+                Settings
+              </div>
+              <div
+                style={{
+                  display: "flex",
+                  cursor: "pointer",
+                  alignItems: "center",
+                  margin: "10px 0",
+                }}
+              >
+                <img
+                  src="https://image.shutterstock.com/image-vector/heart-plus-pozitive-wishlist-icon-260nw-666321889.jpg"
+                  style={{ width: 20, marginRight: "10px" }}
+                  alt=""
+                />
+                My Wishlist
+              </div>
+              <div
+                style={{
+                  cursor: "pointer",
+                  display: "flex",
+                  alignItems: "center",
+                  margin: "10px 0",
+                }}
+                onClick={handleLogOut}
+              >
+                <img
+                  src="https://cdn1.iconfinder.com/data/icons/ios-edge-line-6/25/Logout_1-512.png"
+                  style={{ width: 20, marginRight: "10px" }}
+                  alt=""
+                />
+                Logout
+              </div>
+            </div>
+          )}
         </HEADER>
+
         {modalIsOpen &&<div style = {style.modalBg}><div style = {style.signInModal} ><SignInModal handleClose= {handleClose}/></div></div>}
+        {cityModal && (
+          <div style={style.cityModal}>
+            <Allcity handleClose={handleClose} handleCity={handleCity} />
+          </div>
+        )}
+
       </>
     );
 }
