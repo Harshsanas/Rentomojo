@@ -203,11 +203,10 @@ export const CartSummary = () => {
                                             value={email}
                                             placeholder="Enter Email ID* "
                                             onChange={(e)=> setEmail(e.target.value)}
-                                            maxLength= "6"
                                         />
                                     </div>
                                     <button
-                                        className={name.length > 0 && email.length > 0 ? styles.buttonEn : styles.buttonDi}
+                                        className={name.length>0 && email.length>0 ? styles.buttonEn : styles.buttonDi}
                                         disabled={name.length === 0 || email.length === 0} 
                                         onClick={handleUser}
                                     >
