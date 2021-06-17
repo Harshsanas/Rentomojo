@@ -112,3 +112,129 @@
     align-items: center;
 
 }
+.verifyBg {
+    background: no-repeat  url("https://www.rentomojo.com/public/images/radical-cart/cat__banner.png");
+    background-size: 100%;
+    position: relative;
+    padding-bottom: 20px;
+    
+}
+.verify, .address {
+    padding: 20px;
+    border-radius: 10px;
+    background-color: white;
+}
+.flex {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+.input {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    margin: 10px 0px;
+}
+.input input[type=text] {
+    width: 200px;
+    height: 30px;
+    padding: 5px;
+    border: none;
+    border-bottom: 2px solid gray;
+    outline: none;
+    background-color: rgb(246,249,250);
+    border-radius: 4px;
+}
+.inputdisabled {
+    width: 40px;
+    font-weight: 600;
+    border-radius: 3px;
+}
+
+.inputenabled {
+    width: 40px;
+    font-weight: 600;
+    border-radius: 3px;
+    color: rgb(220,50,38);
+    border: 1px solid rgb(220,50,38);
+    background-color: white; 
+}
+
+.mobcount {
+    position: absolute;
+    left: 24%;
+    top: 75px;
+}
+.nameVerify main {
+    font-weight: 600;
+    margin: 5px;
+    position: relative;
+}
+.nameFlex {
+    display: flex;
+    flex-direction: row;
+    width: 70%;
+    gap: 30px;
+    margin-bottom: 10px;
+}
+.nameFlex input[type=text] {
+    width: 47%;
+    height: 30px;
+    padding: 5px;
+    border: none;
+    border-bottom: 2px solid gray;
+    outline: none;
+    background-color: rgb(246,249,250);
+    border-radius: 4px;
+}
+.email input[type=text] {
+    width: 69%;
+    height: 30px;
+    padding: 5px;
+    border: none;
+    border-bottom: 2px solid gray;
+    outline: none;
+    background-color: rgb(246,249,250);
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+.nameVerify button {
+    width: 100px;
+    position: absolute;
+    left: 70%;
+    margin-left: -100px;
+    background-color: gray;
+    color: white;
+    padding: 7px;
+    font-weight: 500;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+}
+.buttonEn {
+    color: rgb(220,50,38); 
+}
+.addressbg {
+    background: no-repeat  url("https://www.rentomojo.com/public/images/radical-cart/address__banner.svg");
+    background-size: 100%;
+    position: relative;
+    padding-bottom: 20px;
+    
+    
+}
+.addressbox {
+    width: 50%;
+    margin: 10px 0px;
+    font-size: 13px;
+}
+.flexSmall {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    font-size: 13px;
+}
+.flexSmall main {
+    color: rgb(220,50,38);
+    font-size: 11px;
+}

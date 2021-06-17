@@ -9,15 +9,18 @@ export const CartList = () => {
     const cart = [{name: "Rex 3_seater Sofa", image: "https://p.rmjo.in/productSquare/smr3l0tl-500x500.jpg", deposit: "1668", stock: "4", ppmfor3months: "420", ppmfor6months: "400", ppmfor12months: "380",}]
     React.useEffect(()=> {
         const user = getUser('user');
-        axios.get(`http://localhost:8080/carts/${user.mob}`)
+        console.log(user)
+        if(user !== null) {
+            axios.get(`http://localhost:8080/carts/${user.mob}`)
             .then(res=>{
                 setCartData(res.data);
                 console.log(res.data)
             })
             .catch(err=>console.log(err.message));
+        }
     },[])
     return (
-        <div>
+        <div className={styles.itemMargin}>
             <div className={styles.offer}>
                 <div className={styles.image}>
                     <img src="https://www.rentomojo.com/public/images/radical-cart/icons/coupon__icon.svg" alt="img" />
