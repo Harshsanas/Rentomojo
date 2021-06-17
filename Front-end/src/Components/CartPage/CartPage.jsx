@@ -3,9 +3,57 @@ import { CartList } from './CartList'
 import { CartNavbar } from './CartNavbar'
 import { CartSummary } from './CartSummary'
 import styles from "./CartPage.module.css"
+import { getUser } from '../utils/localStorage'
+import axios from 'axios';
 
 export const CartPage = () => {
-    
+    const [cartData, setCartData] = React.useState([])
+
+    const getCartData = () => {
+        const user = getUser('user');
+        //console.log(user)
+        if(user !== null) {
+            axios.get(`http://localhost:8080/carts/${user.mob}`)
+            .then(res=>{
+                setCartData(res.data);
+                //console.log(res.data)
+            })
+            .catch(err=>console.log(err.message));
+        }
+    }
+
+    const deleteItem = (id) => {
+        axios.delete(`http://localhost:8080/carts/${id}`)
+            .then(res => {
+                getCartData();
+            })
+            .catch(err => console.log(err.message));
+    }
+
+    const updateItem = () => {
+        getCartData();
+    }
+
+    const totalRefund = cartData.reduce((ac, el) => {
+        return ac + Number(el.deposit)
+    }, 0)
+    //console.log(totalRefund)
+
+    const totalRent = cartData.reduce((ac, el) => {
+        let rent = el.ppmfor12months * el.quantity
+        if(el.months === "6"){
+            rent = el.ppmfor6months * el.quantity
+        }
+        else if(el.months === "3") {
+            rent = el.ppmfor3months * el.quantity
+        }
+        return ac + rent
+    }, 0)
+    //console.log(totalRent)
+
+    React.useEffect(()=> {
+        getCartData()
+    },[])
     return (
         <div className={styles.display}>
             <div>
@@ -13,10 +61,10 @@ export const CartPage = () => {
             </div>
             <div className={styles.bg}>
                 <div>
-                    <CartSummary/>
+                    <CartSummary refund={totalRefund} rent={totalRent}/>
                 </div>
                 <div>
-                    <CartList/>
+                    <CartList cartData={cartData} deleteItem={deleteItem} updateItem={updateItem}/>
                 </div>
             </div>
         </div>
