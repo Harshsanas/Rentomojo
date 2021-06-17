@@ -5,6 +5,7 @@ import { CartSummary } from './CartSummary'
 import styles from "./CartPage.module.css"
 
 export const CartPage = () => {
+    
     return (
         <div className={styles.display}>
             <div>
