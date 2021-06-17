@@ -5,6 +5,7 @@ import axios from 'axios';
 import { ProductProto } from '../Components/productsProto/ProductProto';
 import { PrdSideBar } from '../Components/sidebar/PrdSideBar';
 import {v4 as uuid} from 'uuid';
+import DiscreteSlider from '../Components/Productpage/FilterSlider';
 
 const categ = {
     bedroom:false,
@@ -14,19 +15,13 @@ const categ = {
     babyFurniture: false
 }
 export function FurnitureProduct(){
+    const {name} = useParams();
+    const ctName = name;
     const [productData, setProductData] = React.useState([])
     const [category, setCategory] = React.useState([])
     const [check, setCheck] = React.useState(categ)
-    const productType = [
-        "Mattresses",
-        "Beds",
-        "Wardrobe & Organizer",
-        "Bedside Tables",
-        "Chest of Drawers"
-    ]
-    let {name} = useParams();
-    let catName = name;
-    
+    const [catName, setCatName] = React.useState(name);
+    const [slider, setSlider] = React.useState(12);
     let id = "";
     const getCateg = async () => {
         await axios.get('http://localhost:8080/furnitureCateg')
@@ -57,20 +52,23 @@ export function FurnitureProduct(){
         setCheck({...check, [e.target.name]: e.target.checked});
         if(checked) {
             if(name === "bedroom") {
-                catName = "Bedroom"
+                setCatName("Bedroom")
             } else if(name === "livingRoom") {
-                catName = "Living Room"
+                setCatName("Living Room")
             } else if(name === "kitchenDining") {
-                catName = "Kitchen & Dinning"
+                setCatName("Kitchen & Dinning")
             } else if(name === "babyFurniture") {
-                catName = "Baby Furniture"
+                setCatName("Baby Furniture")
             } else if (name === "workFromHome") {
-                catName = "Work From Home"
+                setCatName("Work From Home")
             }
         } else {
-            
+            setCatName(ctName)
         }
-        console.log(catName)
+        
+    }
+    const handleMonths = (slider) => {
+        setSlider(slider);
     }
     const style = {
         container: {
@@ -127,26 +125,31 @@ export function FurnitureProduct(){
             </div>
             <div style = {{display: "flex", width: "90%", margin: "auto"}}>
                 <div style = {{width: "20%", marginTop: 100, marginRight:30}}>
+                    <div style = {{width: "90%", padding:"5%", border: "1px solid #E6E6E6", display:"flex", flexDirection:"column", borderRadius:"5px", marginBottom:20}}>
+                        <div>CHOOSE RENTAL TENURE</div>
+                        <DiscreteSlider handleMonths = {handleMonths} color = {"#2FBDC0"} width= "90%" />
+                    </div>
+                    
                     <div style = {style.heading}>
                         <div style = {style.div}>ROOMS</div>
                         <div style = {style.content}>
-                            <input type="checkbox" name="bedroom" checked = {check.bedroom} style = {style.input} onClick = {handleChange} />
+                            <input type="checkbox" name="bedroom" checked = {check.bedroom} style = {style.input} onChange = {handleChange} />
                             <label style = {style.label}>Bedroom</label>
                         </div>
                         <div style = {style.content}>
-                            <input type="checkbox" name="livingRoom" checked = {check.livingRoom} style = {style.input} onClick = {handleChange} />
+                            <input type="checkbox" name="livingRoom" checked = {check.livingRoom} style = {style.input} onChange = {handleChange} />
                             <label style = {style.label}>Living Room</label>
                         </div>
                         <div style = {style.content}>
-                            <input type="checkbox" name="kitchenDining" checked = {check.kitchenDining} style = {style.input} onClick = {handleChange} />
+                            <input type="checkbox" name="kitchenDining" checked = {check.kitchenDining} style = {style.input} onChange = {handleChange} />
                             <label style = {style.label}>Kitchen & Dining</label>
                         </div>
                         <div style = {style.content}>
-                            <input type="checkbox" name="babyFurniture" checked = {check.babyFurniture} style = {style.input} onClick = {handleChange} />
+                            <input type="checkbox" name="babyFurniture" checked = {check.babyFurniture} style = {style.input} onChange = {handleChange} />
                             <label style = {style.label}>Baby Furniture</label>
                         </div>
                         <div>
-                            <input type="checkbox" name="workFromHome" checked = {check.workFromHome} style = {style.input} onClick = {handleChange} />
+                            <input type="checkbox" name="workFromHome" checked = {check.workFromHome} style = {style.input} onChange = {handleChange} />
                             <label style = {style.label}>Work From Home</label>
                         </div>
                     </div>
@@ -154,7 +157,7 @@ export function FurnitureProduct(){
                 <div style = {style.products}>
                     {
                         productData?.map(item=> (
-                            <ProductProto key = {item._id} {...item}/>
+                            <ProductProto key = {item._id} {...item} slider = {slider} />
                         ))
                     }
                 </div>

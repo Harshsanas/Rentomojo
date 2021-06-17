@@ -3,7 +3,8 @@ import { CheckCircleFilled, InfoCircleOutlined, ShoppingCartOutlined } from '@an
 import { Link } from 'react-router-dom';
 import styles from "./ProductAdd.module.css"
 import DiscreteSlider from './FilterSlider';
-
+import { getUser, setUser } from '../utils/localStorage';
+import axios from 'axios';
 export const ProductAdd = ({featureSpecs, image, _id, name, description, color, material, dimensions, productType, bgImage, ppmfor3months, ppmfor6months,
     ppmfor12months, deposit, stock, dishcount, refundable, categId }) => {
         const [product, setProduct] = useState("");
@@ -19,11 +20,25 @@ export const ProductAdd = ({featureSpecs, image, _id, name, description, color, 
             })
         }
         const handleAddCart = () => {
+            const user = getUser('user');
+            // console.log("users", user);
             const payload = {
-                image, _id, name, productType, bgImage, ppmfor3months, ppmfor6months,
-                ppmfor12months, deposit, stock, dishcount,
-                months
+                user:user.mob,
+                name,
+                ppmfor3months, 
+                ppmfor6months,
+                ppmfor12months, 
+                deposit, 
+                stock, 
+                dishcount,
+                months,
+                quantity: 1,
+                refundable,
+                image:image[0],
             }
+            axios.post('http://localhost:8080/carts', payload)
+                .then(res=>console.log(res.data))
+                .catch(err=>console.log(err.message));
         }
         
         const handlerate = (months) => {

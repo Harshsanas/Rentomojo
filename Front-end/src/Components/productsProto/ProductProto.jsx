@@ -3,13 +3,13 @@ import React from 'react';
 import { Redirect } from 'react-router';
 import { QuickViewModal } from '../quickViewModal/QuickViewModal';
 
-export function ProductProto({...restProps}){
-    const {_id, name, image, ppmfor3months} = restProps;
-    const price = ppmfor3months;
+export function ProductProto({slider, ...restProps}){
+    const {_id, name, image, ppmfor3months, ppmfor6months, ppmfor12months} = restProps;
     const img = image[0];
     const [quickView, setQuickView] = React.useState(false)
     const [openModal, setOpenModal] = React.useState(false)
     const [productPage, setProductPage] = React.useState(false);
+    const [price, setPrice] = React.useState(ppmfor12months);
     const showQuickView = () => {
         setQuickView(true);
     }
@@ -93,6 +93,15 @@ export function ProductProto({...restProps}){
             background:"#ffff"
         }
     }
+    React.useEffect(()=> {
+        if(slider === 3) {
+            setPrice(ppmfor3months)
+        } else if(slider === 6) {
+            setPrice(ppmfor6months)
+        } else if(slider === 12) {
+            setPrice(ppmfor12months)
+        }
+    },[slider])
     if(productPage) {
         return <Redirect to={`/product/${_id}`} />;
     } else {
