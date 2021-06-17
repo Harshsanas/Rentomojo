@@ -2,9 +2,22 @@ import React, { useState } from 'react'
 import {DeleteOutlined, InfoCircleOutlined} from "@ant-design/icons"
 import styles from "./CartItem.module.css"
 import axios from 'axios';
-export const CartItem = ({ _id, name, image, deposit, stock, ppmfor3months, ppmfor6months, ppmfor12months, quantity}) => {
+export const CartItem = ({ _id, name, image, deposit, months, stock, ppmfor3months, ppmfor6months, ppmfor12months, quantity}) => {
     const[count, setCount] = useState(quantity)
-    const [valid, setvalid] = useState(12)
+    const [valid, setvalid] = useState(months)
+    const [rate, setRate] = useState(ppmfor12months)
+
+   const handleRate = () => {
+        if(valid === 6) {
+            setRate(ppmfor6months)
+        }
+        else if (valid === 3) {
+            setRate(ppmfor3months)
+        }
+        else {
+            setRate(ppmfor12months)
+        }
+   }
 
     const handleCount = (value) => {
         setCount(count + value)
@@ -16,10 +29,12 @@ export const CartItem = ({ _id, name, image, deposit, stock, ppmfor3months, ppmf
     }
 
     React.useEffect(() => {
-        axios.patch(`http://localhost:8080/carts/${_id}`, {quantity:count})
+        axios.patch(`http://localhost:8080/carts/${_id}`, {quantity:count, months: valid})
             .then(res=>console.log(res.data))
             .catch(err=>console.log(err.message));
-    },[count])
+        handleRate()
+    },[count, valid])
+   
     return (
         <div className={styles.itemBox}>
            <div className={styles.bg}>
@@ -30,7 +45,7 @@ export const CartItem = ({ _id, name, image, deposit, stock, ppmfor3months, ppmf
                         <section>
                             <div>
                                 <div>Rent</div>
-                                <div>200/mon</div>
+                                <div>{rate}/mon</div>
                             </div>
                             <div>
                                 <div>Deposit</div>

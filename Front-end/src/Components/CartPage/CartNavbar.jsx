@@ -1,13 +1,15 @@
 import React from 'react'
 import {CheckCircleFilled, MinusOutlined} from "@ant-design/icons"
 import styles from "./CartNavbar.module.css"
+import { Link } from 'react-router-dom';
+
 
 export const CartNavbar = () => {
     return (
         <div className={styles.display}>
-            <div className={styles.partOne}>
+            <Link to="/" className={styles.partOne}>
                 <img src="https://www.rentomojo.com/public/images/logo.svg" alt="img"/>
-            </div>
+            </Link>
             <div className={styles.partTwo}>
                 <main>
                     <CheckCircleFilled />
