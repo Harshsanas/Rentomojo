@@ -14,13 +14,22 @@ const categ = {
     kitchenDining: false,
     babyFurniture: false
 }
+const prdType = {
+    matresses:false,
+    beds: false,
+    wardrobe: false,
+    bedsideTables: false,
+    chestDrawers: false
+}
 export function FurnitureProduct(){
     const {name} = useParams();
     const ctName = name;
     const [productData, setProductData] = React.useState([])
     const [category, setCategory] = React.useState([])
     const [check, setCheck] = React.useState(categ)
+    const [pType, setPtype] = React.useState(prdType);
     const [catName, setCatName] = React.useState(name);
+    const [typeName, setTypeName] = React.useState("")
     const [slider, setSlider] = React.useState(12);
     let id = "";
     const getCateg = async () => {
@@ -66,6 +75,31 @@ export function FurnitureProduct(){
             setCatName(ctName)
         }
         
+    }
+    const handlePrdChange = (e) => {
+        const {name, checked} = e.target;
+        setPtype({...pType, [e.target.name]: e.target.checked});
+        if(e.target.checked) {
+            if(name === "matresses") {
+                setTypeName("Mattresses")
+            } else if(name === "beds") {
+                setTypeName("Beds")
+            } else if(name === "wardrobe") {
+                setTypeName("Wardrobe& Organizer")
+            } else if(name === "bedsideTables") {
+                setTypeName("Bedside Tables")
+            } else if(name === "chestDrawers") {
+                setTypeName("Chest of Drawers")
+            }
+        } else {
+            setTypeName("")
+        }
+    }
+    const handleFilter = (item) => {
+        if(typeName) {
+            return item.productType === typeName;
+        }
+        return true;
     }
     const handleMonths = (slider) => {
         setSlider(slider);
@@ -153,10 +187,34 @@ export function FurnitureProduct(){
                             <label style = {style.label}>Work From Home</label>
                         </div>
                     </div>
+
+                    <div style = {style.heading}>
+                        <div style = {style.div}>PRODUCT TYPE</div>
+                        <div style = {style.content}>
+                            <input type="checkbox" name="matresses" checked = {pType.matresses} style = {style.input} onChange = {handlePrdChange} />
+                            <label style = {style.label}>Mattresses</label>
+                        </div>
+                        <div style = {style.content}>
+                            <input type="checkbox" name="beds" checked = {pType.beds} style = {style.input} onChange = {handlePrdChange} />
+                            <label style = {style.label}>Beds</label>
+                        </div>
+                        <div style = {style.content}>
+                            <input type="checkbox" name="wardrobe" checked = {pType.wardrobe} style = {style.input} onChange = {handlePrdChange} />
+                            <label style = {style.label}>Wardrobe & Organizer</label>
+                        </div>
+                        <div style = {style.content}>
+                            <input type="checkbox" name="bedsideTables" checked = {pType.bedsideTables} style = {style.input} onChange = {handlePrdChange} />
+                            <label style = {style.label}>Bedside Tables</label>
+                        </div>
+                        <div>
+                            <input type="checkbox" name="chestDrawers" checked = {pType.chestDrawers} style = {style.input} onChange = {handlePrdChange} />
+                            <label style = {style.label}>Chest of Drawers</label>
+                        </div>
+                    </div>
                 </div>
                 <div style = {style.products}>
                     {
-                        productData?.map(item=> (
+                        productData?.filter(handleFilter).map(item=> (
                             <ProductProto key = {item._id} {...item} slider = {slider} />
                         ))
                     }
