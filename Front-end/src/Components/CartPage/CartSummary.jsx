@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react'
-import {CheckCircleFilled, LineOutlined} from "@ant-design/icons"
+import React, { useState } from 'react'
+import {CheckCircleFilled, LineOutlined, RightCircleFilled} from "@ant-design/icons"
 import styles from "./CartSummary.module.css"
 
 const initState = {
@@ -24,6 +24,8 @@ export const CartSummary = () => {
     const [referal, setReferal] = useState("")
     const [email, setEmail] = useState("")
     const [userCond, setUserCond] = useState(true)
+    
+    const styleGo = mobile.length===10 ? "inputenabled" : "inputdisabled"
 
     const handlePay = () => {
         setPay(false)
@@ -130,15 +132,16 @@ export const CartSummary = () => {
                         <div>Verify Your Phone Number</div>
                     </div>
                ) : (
-                    <div>
-                        <div>
+                   <div className={styles.verify}>
+                    <div className={styles.verifyBg}>
+                        <div className={styles.flex}>
                             <img src="https://www.rentomojo.com/public/images/radical-cart/icons/account__icon.svg" alt="img"/>
                             <div>Verify Your Phone Number</div>
                         </div>
                        
                            { mobileCond ? (
                                 <>
-                                <div>
+                                <div className={styles.input}>
                                     <input
                                         type="text"
                                         value={mobile}
@@ -147,17 +150,18 @@ export const CartSummary = () => {
                                         maxLength= "10"
                                     />
                                     <input
+                                        className={mobile.length === 10 ? styles.inputenabled : styles.inputdisabled}
                                         disabled={mobile.length<10}
                                         type="submit"
                                         value="GO"
                                         onClick={handleMobile}
                                     />
                                 </div>
-                                <div>{mobile.length}/10</div>
+                                <div className={styles.mobcount}>{mobile.length}/10</div>
                                 </>
                            ) : otpCond ? (
                             <>
-                            <div>
+                            <div className={styles.input}>
                                 <input
                                     type="text"
                                     value={otp}
@@ -166,6 +170,7 @@ export const CartSummary = () => {
                                     maxLength= "4"
                                 />
                                 <input
+                                    className={otp.length === 4 ? styles.inputenabled : styles.inputdisabled}
                                     disabled={otp.length !== 4}
                                     type="submit"
                                     value="GO"
@@ -175,9 +180,9 @@ export const CartSummary = () => {
                             <div>{otp.length}/4</div>
                             </>
                            ) : (
-                               <div>
+                               <div className={styles.nameVerify}>
                                     <main>Just one last step</main>
-                                    <div>
+                                    <div className={styles.nameFlex}>
                                         <input
                                             type="text"
                                             value={name}
@@ -192,7 +197,7 @@ export const CartSummary = () => {
                                             maxLength= "6"
                                         />
                                     </div>
-                                    <div>
+                                    <div className={styles.email}>
                                         <input
                                             type="text"
                                             value={email}
@@ -201,11 +206,18 @@ export const CartSummary = () => {
                                             maxLength= "6"
                                         />
                                     </div>
-                                    <button disabled={name.length === 0 || email.length === 0} onClick={handleUser}>Submit</button>
+                                    <button
+                                        className={name.length > 0 && email.length > 0 ? styles.buttonEn : styles.buttonDi}
+                                        disabled={name.length === 0 || email.length === 0} 
+                                        onClick={handleUser}
+                                    >
+                                        Submit
+                                    </button>
                                </div>
                            )
     
                            }
+                    </div>
                     </div>
                )}
                </>
@@ -224,24 +236,27 @@ export const CartSummary = () => {
                     <div>Address & payment</div>
                 </div>
             ) : (
-                <div>
-                    <div>
-                        <img src="https://www.rentomojo.com/public/images/radical-cart/icons/address__icon.svg" alt="img" />
-                        <div>Address & payment</div>
+                <div className={styles.address}>
+                    <div className={styles.addressbg}>
+                        <div className={styles.flex}>
+                            <img src="https://www.rentomojo.com/public/images/radical-cart/icons/address__icon.svg" alt="img" />
+                            <div>Address & payment</div>
+                        </div>
+                        <div className={styles.addressbox}>
+                        {user.address}
+                        </div>
+                        <div className={styles.flexSmall}>
+                            <div>Change</div>
+                            <main><RightCircleFilled /></main>
+                        </div>
+                        <div onClick={handlePay} className={styles.button}>
+                            <div>
+                                <main>2627</main>
+                                <div>Payable Now</div>
+                            </div>
+                            <section>Proceed</section>
+                        </div>
                     </div>
-                    <div>
-                       {user.address}
-                    </div>
-                    <div>
-                        <div>Change</div>
-                    </div>
-                    <div onClick={handlePay} className={styles.button}>
-                    <div>
-                         <main>2627</main>
-                         <div>Payable Now</div>
-                    </div>
-                    <section>Proceed</section>
-                 </div>
                 </div>
             )}
 
