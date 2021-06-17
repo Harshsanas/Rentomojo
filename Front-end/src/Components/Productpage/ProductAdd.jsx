@@ -20,11 +20,9 @@ export const ProductAdd = ({featureSpecs, image, _id, name, description, color, 
         }
         const handleAddCart = () => {
             const payload = {
-                image, _id, name, dimensions, productType, bgImage, ppmfor3months, ppmfor6months,
-                ppmfor12months, deposit, stock, dishcount, refundable,
-                months,
-                rate,
-                count: 1
+                image, _id, name, productType, bgImage, ppmfor3months, ppmfor6months,
+                ppmfor12months, deposit, stock, dishcount,
+                months
             }
         }
         
