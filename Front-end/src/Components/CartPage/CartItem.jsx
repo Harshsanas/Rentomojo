@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import {DeleteOutlined, InfoCircleOutlined} from "@ant-design/icons"
 import styles from "./CartItem.module.css"
 import axios from 'axios';
-export const CartItem = ({ _id, name, image, deposit, stock, ppmfor3months, ppmfor6months, ppmfor12months, quantity}) => {
+export const CartItem = ({ _id, name, image, deposit, stock, ppmfor3months, ppmfor6months, ppmfor12months, quantity, deleteItem}) => {
     const[count, setCount] = useState(quantity)
     const [valid, setvalid] = useState(12)
 
@@ -14,7 +14,7 @@ export const CartItem = ({ _id, name, image, deposit, stock, ppmfor3months, ppmf
         const value = e.target.value
         setvalid(Number(value))
     }
-
+    
     React.useEffect(() => {
         axios.patch(`http://localhost:8080/carts/${_id}`, {quantity:count})
             .then(res=>console.log(res.data))
@@ -39,7 +39,7 @@ export const CartItem = ({ _id, name, image, deposit, stock, ppmfor3months, ppmf
                         </section>
                     </div>
                     <div>
-                        <DeleteOutlined />
+                        <DeleteOutlined onClick = {()=>deleteItem(_id)} />
                     </div>
                </div>
                <div className={styles.quantity}>

@@ -155,7 +155,15 @@ app.patch('/carts/:id', async(req, res) => {
         res.status(404).send(err.message);
     }
 })  
-
+app.delete('/carts/:id', async(req, res) => {
+    id = req.params.id;
+    try {
+        const cartData = await CartSchema.findByIdAndDelete(id);
+        res.status(201).send(cartData);
+    } catch (err) {
+        res.status(404).send(err.message);
+    }
+})  
 
 // GET ALL THE CATEGORY OF PRODUCT
 

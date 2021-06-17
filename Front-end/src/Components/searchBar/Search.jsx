@@ -40,7 +40,8 @@ export function Search() {
         setSearch(e.target.value)
     }
     React.useEffect(() => {
-        axios.get(`http://localhost:8080/products?search=${search}`)
+        if(search) {
+            axios.get(`http://localhost:8080/products?search=${search}`)
             .then(res=>{
                 setSearchData(res.data);
                 set(res.data);
@@ -48,6 +49,7 @@ export function Search() {
             .catch(err=>{
                 console.log(err.message);
             })
+        }
     },[search])
     return (
         <div style = {style.searchContent}>
