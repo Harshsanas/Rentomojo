@@ -1,16 +1,43 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Modal from 'react-modal';
-
+import axios from 'axios';
+import { getUser } from '../utils/localStorage';
+import SimpleAlerts from './AlertBox';
 
 export function QuickViewModal({openModal, setOpenModal, ...restProps}) {
     const [index, setIndex] = React.useState(0);
     const [tenure, setTenure] = React.useState("3");
     const [price, setPrice] = React.useState(0);
+    const [cartButton, setCartButton] = React.useState(true);
+    const [alertPopUp, setAlertPopUp] = React.useState(false);
     const code = "HOME5"
-    const {name, ppmfor3months, ppmfor6months, ppmfor12months, deposit, dishcount, image} = restProps;
+    const {name, ppmfor3months, ppmfor6months, ppmfor12months, deposit, dishcount, image, stock, refundable} = restProps;
     const handleTenure = (e) => {
         setTenure(e.target.value);
+    }
+    const handleCart = () => {
+        setCartButton(false);
+        setAlertPopUp(true);
+        const user = getUser('user');
+        // console.log("users", user);
+        const payload = {
+            user:user.mob,
+            name,
+            ppmfor3months, 
+            ppmfor6months,
+            ppmfor12months, 
+            deposit, 
+            stock, 
+            dishcount,
+            months:tenure,
+            quantity: 1,
+            refundable,
+            image:image[0],
+        }
+        axios.post('http://localhost:8080/carts', payload)
+            .then(res=>console.log(res.data))
+            .catch(err=>console.log(err.message));
     }
     const customStyles = {
         content : {
@@ -94,7 +121,10 @@ export function QuickViewModal({openModal, setOpenModal, ...restProps}) {
           style={customStyles}
           contentLabel="Example Modal"
           
-        >
+        >   
+            {alertPopUp && <div>
+                <SimpleAlerts />
+            </div>}
             <div style = {styles.container}>
                 <div style = {{width: "45%",marginRight:"50px", position:"relative"}}>
                     <button disabled = {index === image.length-1} style = {styles.next} onClick = {()=>setIndex(prev => prev + 1)}>^</button>
@@ -195,13 +225,14 @@ export function QuickViewModal({openModal, setOpenModal, ...restProps}) {
                         <button style = {{
                             cursor: "pointer",
                             outline: "none",
-                            background: "rgb(255, 0, 0)",
+                            background: cartButton ? "rgb(255, 0, 0)" : "rgb(255, 0, 0, 0.5)",
                             padding: "20px 30px",
                             border: "none",
                             color: "#ffff",
                             borderRadius:5,
-                            fontSize:16
-                        }}>
+                            fontSize:16,
+                            
+                        }} onClick = {handleCart} >
                             Add to cart
                         </button>
                     </div>

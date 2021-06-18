@@ -106,7 +106,7 @@ export function SignInModal({handleClose}) {
                         <div style = {{textAlign:"right", width: "80%",fontSize: 12
                             }}>{number.length}/10</div></>}
                         {isOtp && <><input type="number" min='0' max = '999999' value = {otp} placeholder="Enter your OTP" style = {style.input} onChange = {(e)=>setOtp(e.target.value)} />
-                        </>}
+                        <div style = {{height:"10px"}}></div></>}
                         <div>
                             <input type="text" value = {name} placeholder="Enter your name" style = {style.input} onChange = {(e)=>setName(e.target.value)} />
                         </div>

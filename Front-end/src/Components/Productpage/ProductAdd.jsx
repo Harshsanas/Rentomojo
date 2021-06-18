@@ -5,11 +5,13 @@ import styles from "./ProductAdd.module.css"
 import DiscreteSlider from './FilterSlider';
 import { getUser, setUser } from '../utils/localStorage';
 import axios from 'axios';
+import SimpleAlerts from '../quickViewModal/AlertBox';
 export const ProductAdd = ({featureSpecs, image, _id, name, description, color, material, dimensions, productType, bgImage, ppmfor3months, ppmfor6months,
     ppmfor12months, deposit, stock, dishcount, refundable, categId }) => {
         const [product, setProduct] = useState("");
         const [months, setMonths] = useState("");
-        const [rate, setRate] = useState(ppmfor12months)
+        const [rate, setRate] = useState(ppmfor12months);
+        const [alertPopUp, setAlertPopUp] = React.useState(false);
         console.log(months, product)
 
         const handleMonths = (slide) => {
@@ -20,6 +22,8 @@ export const ProductAdd = ({featureSpecs, image, _id, name, description, color, 
             })
         }
         const handleAddCart = () => {
+            setAlertPopUp(true);
+           
             const user = getUser('user');
             // console.log("users", user);
             const payload = {
@@ -68,6 +72,9 @@ export const ProductAdd = ({featureSpecs, image, _id, name, description, color, 
                 <div style={{padding: "13px" }}>
                    <DiscreteSlider handleMonths={handleMonths}/>
                 </div>
+                {alertPopUp && <div>
+                        <SimpleAlerts />
+                    </div>}
                 <table>
                     <tbody>
                         <tr className={styles.firstrow}>
