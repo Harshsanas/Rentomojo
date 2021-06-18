@@ -44,5 +44,11 @@
     ```
      npm i axios
     ```
+## Pages:-
+    - Landing Page
+    - Sign-in page
+    - Cart page
+    - Product Page
+    
 ## Deployed Link:- 
   link:- 
