@@ -98,7 +98,6 @@ export default function Feedback() {
                 style={{ height: "21px" }}
                 className="arr-btn"
               />
-              .
             </button>
           </div>
           <div className="feedback-section">
