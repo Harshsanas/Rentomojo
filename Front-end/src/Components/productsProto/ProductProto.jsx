@@ -112,7 +112,7 @@ export function ProductProto({slider, ...restProps}){
                 </div>
                 <div style = {style.title}>{name}</div>
                 <div style = {style.priceDiv}>
-                    <div>{price}/ mo</div>
+                    <div>{price}rs/ mo</div>
                     <div>Delivery: 3 days</div>
                 </div>
                 <div style = {style.wish}>

@@ -204,7 +204,7 @@ export default function Header() {
                     display: "flex",
                     justifyContent: "center",
                     alignItems: "center",
-                    background: "green",
+                    background: `rgb(${Math.random()*255},${Math.random()*255},${Math.random()*255})`,
                     marginRight: "5px",
                   }}
                 >
