@@ -68,29 +68,30 @@ export function ProductProto({slider, ...restProps}){
             
         },
         quickView: {
-            width: "50%",
+            width: "90%",
             height: 30,
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
-            color: "#74ce1f",
+            color: "#42ce1f",
             fontSize: 14,
             border: "1px solid #42ce1f",
             borderRadius: "15px",
             marginRight: '-50%',
-            transform: 'translate(-50%, -50%)'
+            transform: 'translate(-50%, -50%)',
+
         },
         viewContainer: {
-            width: "100%",
+            width: "60%",
             display: "flex",
             justfyContent: "center",
             alignItems: "center",
             position: "absolute",
-            height: 40,
-            top:"100%",
+            height: 80,
+            top:"30%",
             left:"50%",
-            // zIndex: 8,
-            background:"#ffff"
+            // zIndex: 5,
+            background:"transparent"
         }
     }
     React.useEffect(()=> {
@@ -112,7 +113,7 @@ export function ProductProto({slider, ...restProps}){
                 </div>
                 <div style = {style.title}>{name}</div>
                 <div style = {style.priceDiv}>
-                    <div>{price}/ mo</div>
+                    <div>{price}rs/ mo</div>
                     <div>Delivery: 3 days</div>
                 </div>
                 <div style = {style.wish}>

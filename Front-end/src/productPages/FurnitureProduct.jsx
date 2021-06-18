@@ -160,7 +160,10 @@ export function FurnitureProduct(){
             <div style = {{display: "flex", width: "90%", margin: "auto"}}>
                 <div style = {{width: "20%", marginTop: 100, marginRight:30}}>
                     <div style = {{width: "90%", padding:"5%", border: "1px solid #E6E6E6", display:"flex", flexDirection:"column", borderRadius:"5px", marginBottom:20}}>
-                        <div>CHOOSE RENTAL TENURE</div>
+                        <div style = {{display:"flex", justifyContent:"space-between", marginBottom:"15px"}}>
+                            <div style = {{fontSize:"13px"}}>CHOOSE RENTAL TENURE</div>
+                            <img src="https://www.rentomojo.com/public/images/icons/info-line-icon.svg" alt="" style = {{width: 15, height: 15}} />
+                        </div>
                         <DiscreteSlider handleMonths = {handleMonths} color = {"#2FBDC0"} width= "90%" />
                     </div>
                     
