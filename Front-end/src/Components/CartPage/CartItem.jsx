@@ -44,16 +44,16 @@ export const CartItem = ({ _id, updateItem,name, image, deposit, months, deleteI
            <div className={styles.bg}>
                <div className={styles.item}>
                     <img src={image} alt="img" />
-                    <div>
+                    <div className={styles.itemMain}>
                         <main>{name}</main>
                         <section>
                             <div>
                                 <div>Rent</div>
-                                <div>{rate}/mon</div>
+                                <div>₹{rate}/mon</div>
                             </div>
                             <div>
                                 <div>Deposit</div>
-                                <div>{deposit}</div>
+                                <div>₹{deposit}</div>
                             </div>
                         </section>
                     </div>

@@ -77,12 +77,15 @@
     left: 10px;
     background-color: white;
     padding: 2px;
+    font-weight: 600;
 }
 .rentOne main {
     display: flex;
     gap: 100px;
     justify-content: space-between;
     padding-bottom: 5px;
+    font-size: 15px;
+    font-weight: 500;
 }
 .note {
     display: flex;
@@ -250,4 +253,9 @@
     color: rgb(220,50,38);
     font-size: 11px;
    
+}
+.button main {
+    font-weight: 600;
+    font-size: 15px;
+    letter-spacing: 1px;
 }
