@@ -394,13 +394,6 @@ app.get('/product/:id', async(req, res) => {
         res.status(404).send(err.message)
     }
 })
-if(process.env.NODE_ENV === "production") {
-    const path = require('path');
-    app.get('/', (req, res) => {
-        app.use(express.static(path.resolve(__dirname, 'client', 'build')));
-        res.send(path.resolve(__dirname, 'client', 'build', 'index.html'));
-    })
-}
 
 const start = () => {
     mongoose.connect(MONGOURI, {
