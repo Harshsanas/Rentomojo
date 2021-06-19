@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const express = require('express');
-
+const {MONGOURI} = require('./config/keys');
 const cors = require('cors');
 const furnitureData = require('./Data/furnitureData');
 const furnitureCategData = require('./Data/furnitureCateg');
@@ -396,7 +396,7 @@ app.get('/product/:id', async(req, res) => {
 })
 
 const start = () => {
-    mongoose.connect(process.env.DATABASE_STRING, {
+    mongoose.connect(MONGOURI, {
         useNewUrlParser: true,
         useUnifiedTopology: true,
     }, (req, res) => {
