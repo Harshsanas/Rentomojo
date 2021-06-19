@@ -8,3 +8,6 @@
 .display {
     background-color: rgb(245,247,250);
 }
+.cartBox {
+    position: relative;
+}

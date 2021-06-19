@@ -13,7 +13,7 @@ const initState = {
                 560001`
 }
 
-export const CartSummary = ({refund, rent}) => {
+export const CartSummary = ({refund, rent, handleView}) => {
     const [user, setUser] = useState(initState)
     const [pay, setPay] = useState(true)
     const [mobile, setMobile] = useState("")
@@ -247,9 +247,9 @@ export const CartSummary = ({refund, rent}) => {
                             <div>Change</div>
                             <main><RightCircleFilled /></main>
                         </div>
-                        <div onClick={handlePay} className={styles.button}>
+                        <div onClick={handleView} className={styles.button}>
                             <div>
-                                <main>2627</main>
+                                <main>₹{refund+rent}</main>
                                 <div>Payable Now</div>
                             </div>
                             <section>Proceed</section>

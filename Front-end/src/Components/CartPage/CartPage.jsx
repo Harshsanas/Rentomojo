@@ -2,12 +2,22 @@ import React from 'react'
 import { CartList } from './CartList'
 import { CartNavbar } from './CartNavbar'
 import { CartSummary } from './CartSummary'
+import { Payment } from "./Payment"
 import styles from "./CartPage.module.css"
 import { getUser } from '../utils/localStorage'
 import axios from 'axios';
 
 export const CartPage = () => {
     const [cartData, setCartData] = React.useState([])
+    const [view, setView] = React.useState(false)
+
+    const handleView = () => {
+        setView(true)
+    }
+    const handleClose = () => {
+        setView(false)
+    }
+
 
     const getCartData = () => {
         const user = getUser('user');
@@ -61,10 +71,13 @@ export const CartPage = () => {
             </div>
             <div className={styles.bg}>
                 <div>
-                    <CartSummary refund={totalRefund} rent={totalRent}/>
+                    <CartSummary refund={totalRefund} rent={totalRent} handleView={handleView}/>
                 </div>
-                <div>
+                <div className={styles.cartBox}>
                     <CartList cartData={cartData} deleteItem={deleteItem} updateItem={updateItem}/>
+                    <div>
+                        <Payment view={view} total={totalRent+totalRefund} handleClose={handleClose}/>
+                    </div>
                 </div>
             </div>
         </div>
