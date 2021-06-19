@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const express = require('express');
-const {MONGOURI} = require('./config/keys');
+
 const cors = require('cors');
 const furnitureData = require('./Data/furnitureData');
 const furnitureCategData = require('./Data/furnitureCateg');
@@ -396,7 +396,7 @@ app.get('/product/:id', async(req, res) => {
 })
 
 const start = () => {
-    mongoose.connect(MONGOURI, {
+    mongoose.connect(process.env.DATABASE_STRING, {
         useNewUrlParser: true,
         useUnifiedTopology: true,
     }, (req, res) => {
@@ -406,6 +406,4 @@ const start = () => {
         console.log("Listening to the port 8080...");
     })
 }
-start()
-
-
+start();
