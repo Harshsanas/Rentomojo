@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import {RightOutlined} from "@ant-design/icons"
 import styles from "./Payment.module.css"
 import {Redirect} from "react-router-dom"
